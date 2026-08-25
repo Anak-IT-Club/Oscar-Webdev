@@ -54,12 +54,18 @@
             <div class="sidebar-wrapper">
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column sidebar-menu" data-lte-toggle="treeview" role="menu">
-                        <li class="nav-item">
-                            <a href="{{ url('/home') }}" class="nav-link {{ request()->is('home') ? 'active' : '' }}">
-                                <i class="nav-icon bi bi-grid-1x2-fill"></i>
-                                <p>Dashboard</p>
-                            </a>
-                        </li>
+                    <li class="nav-item">
+                        <a href="{{ url('/home') }}" class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}">
+                            <i class="nav-icon bi bi-grid-1x2-fill"></i>
+                            <p>Dashboard</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('users.index') }}" class="nav-link {{ request()->routeIs('users.*') ? 'active' : '' }}">
+                            <i class="nav-icon bi bi-people-fill"></i>
+                            <p>Users</p>
+                        </a>
+                    </li>
                     </ul>
                 </nav>
             </div>
