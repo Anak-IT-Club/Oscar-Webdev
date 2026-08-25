@@ -1,0 +1,64 @@
+name: 🚀 Deploy website on push production
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+jobs:
+  web-deploy:
+    name: 🎉 Deploy To Production
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📂 Sync files
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.ITCLUB_HOST }}
+          username: ${{ secrets.ITCLUB_USER }}
+          password: ${{ secrets.ITCLUB_PASS }}
+          port: ${{ secrets.ITCLUB_PORT }}
+          script: cd server/oscar.itclub.id && git reset --hard HEAD && git pull origin master
+
+      - name: ⚠️ Copy File Env
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.ITCLUB_HOST }}
+          username: ${{ secrets.ITCLUB_USER }}
+          password: ${{ secrets.ITCLUB_PASS }}
+          port: ${{ secrets.ITCLUB_PORT }}
+          script: cd server/oscar.itclub.id && php -r "file_exists('.env') || copy('.env.example', '.env');"
+
+      - name: 🔱 Chmod Storage
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.ITCLUB_HOST }}
+          username: ${{ secrets.ITCLUB_USER }}
+          password: ${{ secrets.ITCLUB_PASS }}
+          port: ${{ secrets.ITCLUB_PORT }}
+          script: cd server/oscar.itclub.id && chmod -R 777 storage bootstrap/cache && chmod -R 777 public
+
+      - name: ♻️ Artisan Generate
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.ITCLUB_HOST }}
+          username: ${{ secrets.ITCLUB_USER }}
+          password: ${{ secrets.ITCLUB_PASS }}
+          port: ${{ secrets.ITCLUB_PORT }}
+          script: cd server/oscar.itclub.id && php artisan key:generate
+
+      - name: ♻️ Artisan Optimize
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.ITCLUB_HOST }}
+          username: ${{ secrets.ITCLUB_USER }}
+          password: ${{ secrets.ITCLUB_PASS }}
+          port: ${{ secrets.ITCLUB_PORT }}
+          script: cd server/oscar.itclub.id && php artisan optimize
+
+      - name: ♻️ Artisan Config Clear
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.ITCLUB_HOST }}
+          username: ${{ secrets.ITCLUB_USER }}
+          password: ${{ secrets.ITCLUB_PASS }}
+          port: ${{ secrets.ITCLUB_PORT }}
+          script: cd server/oscar.itclub.id && php artisan config:clear
