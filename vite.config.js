@@ -6,6 +6,7 @@ export default defineConfig({
         laravel({
             input: [
                 'resources/js/adminlte.js',
+                'resources/js/landing.js',
             ],
             refresh: true,
         }),

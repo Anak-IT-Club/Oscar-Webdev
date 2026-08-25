@@ -2,8 +2,8 @@
 
 @section('content')
     @include('welcome.navbar')
-    @include('welcome.hero')
+
     @include('welcome.tentang')
-    @include('welcome.cara-kerja')
+
     @include('welcome.footer')
 @endsection
