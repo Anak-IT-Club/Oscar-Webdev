@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" data-bs-theme="light">
 <head>
     <meta charset="utf-8">
@@ -64,6 +64,12 @@
                         <a href="{{ route('users.index') }}" class="nav-link {{ request()->routeIs('users.*') ? 'active' : '' }}">
                             <i class="nav-icon bi bi-people-fill"></i>
                             <p>Users</p>
+                        </a>
+                    </li>
+                  <li class="nav-item">
+                      <a href="{{ route('nasabah.index') }}" class="nav-link {{ request()->routeIs('nasabah.*') ? 'active' : '' }}">
+                          <i class="nav-icon bi bi-person-vcard-fill"></i>
+                          <p>Nasabah</p>
                         </a>
                     </li>
                     </ul>
