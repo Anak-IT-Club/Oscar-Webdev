@@ -8,10 +8,13 @@
     },
     "devDependencies": {
         "@popperjs/core": "^2.11.6",
+        "admin-lte": "^4.8.5",
         "axios": "^1.11.0",
-        "bootstrap": "^5.2.3",
+        "bootstrap": "^5.3.8",
+        "bootstrap-icons": "^1.13.1",
         "concurrently": "^9.0.1",
         "laravel-vite-plugin": "^2.0.0",
+        "overlayscrollbars": "^2.16.0",
         "sass": "^1.56.1",
         "vite": "^7.0.7"
     }

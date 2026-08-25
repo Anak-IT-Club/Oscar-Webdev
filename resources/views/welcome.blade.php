@@ -1,26 +1,22 @@
-@extends('layouts.app')
+@extends('layouts.guest')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8 text-center mt-5">
-            <h1 class="display-4">{{ config('app.name', 'Laravel') }}</h1>
-            <p class="lead text-muted">Selamat datang di aplikasi Anda.</p>
+    <p class="text-center text-muted mb-4">
+        Selamat datang di <strong>{{ config('app.name', 'Laravel') }}</strong>.
+        Silakan masuk atau daftar untuk melanjutkan.
+    </p>
 
-            <div class="d-flex justify-content-center gap-2 mt-4">
-                @if (Route::has('login'))
-                    @auth
-                        <a href="{{ url('/home') }}" class="btn btn-primary">Dashboard</a>
-                    @else
-                        <a href="{{ route('login') }}" class="btn btn-outline-primary">Login</a>
+    <div class="d-grid gap-2">
+        @if (Route::has('login'))
+            @auth
+                <a href="{{ url('/home') }}" class="btn btn-primary">{{ __('Dashboard') }}</a>
+            @else
+                <a href="{{ route('login') }}" class="btn btn-primary">{{ __('Login') }}</a>
 
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}" class="btn btn-primary">Register</a>
-                        @endif
-                    @endauth
+                @if (Route::has('register'))
+                    <a href="{{ route('register') }}" class="btn btn-outline-secondary">{{ __('Register') }}</a>
                 @endif
-            </div>
-        </div>
+            @endauth
+        @endif
     </div>
-</div>
 @endsection
