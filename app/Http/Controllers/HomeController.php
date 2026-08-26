@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +24,14 @@ class HomeController extends Controller
      */
     public function index()
     {
+        if (auth()->user()->role === 'admin') {
+            $totalUsers = User::count();
+            $totalSiswa = User::where('role', 'siswa')->count();
+            $totalPoin = User::sum('poin');
+
+            return view('home', compact('totalUsers', 'totalSiswa', 'totalPoin'));
+        }
+
         return view('home');
     }
 }
