@@ -3,54 +3,62 @@
 @section('title', 'Daftar User')
 
 @section('content')
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3 reveal">
+        <div>
+            <span class="text-uppercase fw-semibold" style="color:var(--smart-accent);letter-spacing:.08em;">Manajemen</span>
+            <h2 class="section-title mt-1 mb-0">Daftar User</h2>
+        </div>
+        <a href="{{ route('users.create') }}" class="btn btn-cta-primary">
+            <i class="bi bi-plus-lg me-1"></i> Tambah User
+        </a>
+    </div>
+
     @if (session('success'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            {{ session('success') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
+        <div class="alert alert-success" role="alert">{{ session('success') }}</div>
     @endif
-
     @if (session('error'))
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            {{ session('error') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
+        <div class="alert alert-danger" role="alert">{{ session('error') }}</div>
     @endif
 
-    <div class="card">
-        <div class="card-header">
-            <h3 class="card-title"><i class="bi bi-people-fill me-2"></i> Kelola User</h3>
-            <div class="card-tools">
-                <a href="{{ route('users.create') }}" class="btn btn-primary btn-sm">
-                    <i class="bi bi-plus-lg me-1"></i> Tambah
-                </a>
-            </div>
-        </div>
-
-        <div class="card-body table-responsive p-0">
-            <table class="table table-hover text-nowrap mb-0">
+    <div class="contact-card p-4 reveal">
+        <div class="table-responsive">
+            <table class="table align-middle mb-0">
                 <thead>
                     <tr>
-                        <th style="width: 40px;">#</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Created</th>
-                        <th class="text-end" style="width: 130px;">Aksi</th>
+                        <th style="width:40px;">#</th>
+                        <th>NISN</th>
+                        <th>Nama</th>
+                        <th>Kelas</th>
+                        <th>Jurusan</th>
+                        <th>No. HP</th>
+                        <th>Poin</th>
+                        <th>Role</th>
+                        <th class="text-end" style="width:120px;">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
                     @forelse ($users as $user)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $user->name }}</td>
-                            <td>{{ $user->email }}</td>
-                            <td>{{ $user->created_at->format('d/m/Y H:i') }}</td>
+                            <td>{{ $user->nisn ?? '-' }}</td>
+                            <td>{{ $user->nama }}</td>
+                            <td>{{ $user->kelas ?? '-' }}</td>
+                            <td>{{ $user->jurusan ?? '-' }}</td>
+                            <td>{{ $user->no_hp ?? '-' }}</td>
+                            <td>{{ number_format($user->poin, 0, ',', '.') }}</td>
+                            <td>
+                                @if ($user->role === 'admin')
+                                    <span class="badge text-bg-danger">Admin</span>
+                                @else
+                                    <span class="badge text-bg-success">Siswa</span>
+                                @endif
+                            </td>
                             <td class="text-end">
                                 <a href="{{ route('users.edit', $user) }}" class="btn btn-sm btn-warning" title="Edit">
                                     <i class="bi bi-pencil"></i>
                                 </a>
                                 <form action="{{ route('users.destroy', $user) }}" method="POST" class="d-inline"
-                                      onsubmit="return confirm('Hapus user {{ $user->name }}?');">
+                                      onsubmit="return confirm('Hapus user {{ $user->nama }}?');">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-sm btn-danger" title="Hapus">
@@ -61,7 +69,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="5" class="text-center text-muted py-3">Belum ada user.</td>
+                            <td colspan="9" class="text-center text-muted py-3">Belum ada user.</td>
                         </tr>
                     @endforelse
                 </tbody>
@@ -69,7 +77,7 @@
         </div>
 
         @if ($users->hasPages())
-            <div class="card-footer clearfix">
+            <div class="mt-3">
                 {{ $users->links('pagination::bootstrap-5') }}
             </div>
         @endif

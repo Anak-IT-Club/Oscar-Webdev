@@ -19,9 +19,15 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
-        'name',
+        'nisn',
+        'nama',
         'email',
         'password',
+        'kelas',
+        'jurusan',
+        'no_hp',
+        'poin',
+        'role',
     ];
 
     /**
@@ -44,6 +50,15 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'poin' => 'integer',
         ];
+    }
+
+    /**
+     * Cek apakah user adalah admin.
+     */
+    public function isAdmin(): bool
+    {
+        return $this->role === 'admin';
     }
 }

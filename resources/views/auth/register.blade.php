@@ -7,13 +7,13 @@
         @csrf
 
         <div class="mb-3">
-            <label for="name" class="form-label">{{ __('Name') }}</label>
+            <label for="nama" class="form-label">{{ __('Nama') }}</label>
             <div class="input-group">
                 <span class="input-group-text"><i class="bi bi-person"></i></span>
-                <input id="name" type="text"
-                       class="form-control @error('name') is-invalid @enderror"
-                       name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
-                @error('name')
+                <input id="nama" type="text"
+                        class="form-control @error('nama') is-invalid @enderror"
+                        name="nama" value="{{ old('nama') }}" required autocomplete="name" autofocus>
+                @error('nama')
                     <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                 @enderror
             </div>

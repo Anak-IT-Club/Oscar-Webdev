@@ -1,13 +1,13 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" data-bs-theme="light">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>@yield('title', config('app.name', 'Laravel'))</title>
-    @vite(['resources/js/adminlte.js'])
+    <title>@yield('title', 'Smart Site')</title>
+    @vite(['resources/js/adminlte.js', 'resources/js/dashboard.js'])
 </head>
-<body class="app sidebar-mini sidebar-expand-lg">
+<body class="app sidebar-collapse">
     <div class="app-wrapper">
 
         {{-- Navbar --}}
@@ -24,8 +24,8 @@
                 <ul class="navbar-nav ms-auto">
                     @auth
                         <li class="nav-item dropdown">
-                            <a class="nav-link" data-bs-toggle="dropdown" href="#">
-                                <span class="me-1">{{ Auth::user()->name }}</span>
+                            <a class="nav-link" data-bs-toggle="dropdown" href="#" role="button">
+                                <span class="me-1">{{ Auth::user()->nama }}</span>
                                 <i class="bi bi-person-circle"></i>
                             </a>
                             <div class="dropdown-menu dropdown-menu-end">
@@ -44,34 +44,30 @@
         </nav>
 
         {{-- Sidebar --}}
-        <aside class="app-sidebar bg-body-secondary">
+        <aside class="app-sidebar">
             <div class="sidebar-brand">
                 <a href="{{ url('/') }}" class="brand-link">
-                    <i class="bi bi-box-seam-fill brand-image me-2"></i>
-                    <span class="brand-text fw-light">{{ config('app.name', 'Laravel') }}</span>
+                    <i class="bi bi-recycle brand-image me-2"></i>
+                    <span class="brand-text fw-light">Smart Site</span>
                 </a>
             </div>
             <div class="sidebar-wrapper">
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column sidebar-menu" data-lte-toggle="treeview" role="menu">
-                    <li class="nav-item">
-                        <a href="{{ url('/home') }}" class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}">
-                            <i class="nav-icon bi bi-grid-1x2-fill"></i>
-                            <p>Dashboard</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ route('users.index') }}" class="nav-link {{ request()->routeIs('users.*') ? 'active' : '' }}">
-                            <i class="nav-icon bi bi-people-fill"></i>
-                            <p>Users</p>
-                        </a>
-                    </li>
-                  <li class="nav-item">
-                      <a href="{{ route('nasabah.index') }}" class="nav-link {{ request()->routeIs('nasabah.*') ? 'active' : '' }}">
-                          <i class="nav-icon bi bi-person-vcard-fill"></i>
-                          <p>Nasabah</p>
-                        </a>
-                    </li>
+                        <li class="nav-item">
+                            <a href="{{ route('home') }}" class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}">
+                                <i class="nav-icon bi bi-grid-1x2-fill"></i>
+                                <p>Dashboard</p>
+                            </a>
+                        </li>
+                        @if (auth()->user()->role === 'admin')
+                        <li class="nav-item">
+                            <a href="{{ route('users.index') }}" class="nav-link {{ request()->routeIs('users.*') ? 'active' : '' }}">
+                                <i class="nav-icon bi bi-people-fill"></i>
+                                <p>Users</p>
+                            </a>
+                        </li>
+                        @endif
                     </ul>
                 </nav>
             </div>

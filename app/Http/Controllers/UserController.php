@@ -9,6 +9,20 @@ use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
     /**
+     * Hanya admin yang boleh mengelola user.
+     */
+    public function __construct()
+    {
+        $this->middleware(function ($request, $next) {
+            if (! auth()->user() || auth()->user()->role !== 'admin') {
+                abort(403, 'Hanya admin yang dapat mengelola user.');
+            }
+
+            return $next($request);
+        });
+    }
+
+    /**
      * Display a listing of the resource.
      */
     public function index()
@@ -32,7 +46,13 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'name' => ['required', 'string', 'max:255'],
+            'nisn' => ['nullable', 'string', 'max:20', 'unique:users,nisn'],
+            'nama' => ['required', 'string', 'max:255'],
+            'kelas' => ['nullable', 'string', 'max:50'],
+            'jurusan' => ['nullable', 'string', 'max:100'],
+            'no_hp' => ['nullable', 'string', 'max:20'],
+            'poin' => ['nullable', 'integer', 'min:0'],
+            'role' => ['required', 'in:admin,siswa'],
             'email' => ['required', 'email', 'unique:users,email'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
@@ -59,8 +79,14 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         $data = $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            // 'email' => ['required', 'email', 'unique:users,email,'.$user->id],
+            'nisn' => ['nullable', 'string', 'max:20', 'unique:users,nisn,'.$user->id],
+            'nama' => ['required', 'string', 'max:255'],
+            'kelas' => ['nullable', 'string', 'max:50'],
+            'jurusan' => ['nullable', 'string', 'max:100'],
+            'no_hp' => ['nullable', 'string', 'max:20'],
+            'poin' => ['nullable', 'integer', 'min:0'],
+            'role' => ['required', 'in:admin,siswa'],
+            'email' => ['required', 'email', 'unique:users,email,'.$user->id],
             'password' => ['nullable', 'string', 'min:8', 'confirmed'],
         ]);
 

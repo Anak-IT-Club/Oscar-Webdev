@@ -1,0 +1,86 @@
+:root {
+    --ss-green: #1f7a3d;
+    --ss-green-dark: #155f2c;
+    --ss-green-darker: #0f4821;
+    --ss-accent: #34a853;
+}
+
+/* ============ NAVBAR ============ */
+.app-header.navbar,
+.app-header.navbar.bg-body {
+    background: linear-gradient(90deg, var(--ss-green-dark), var(--ss-green)) !important;
+}
+/* Paksa navbar menempel di tepi kiri (hilangkan reservasi ruang sidebar) */
+.app-header {
+    left: 0 !important;
+    right: 0 !important;
+    margin-left: 0 !important;
+}
+.app-header .navbar-nav .nav-link {
+    color: #fff !important;
+}
+.app-header .navbar-nav .nav-link:hover {
+    color: #d8f0e0 !important;
+}
+
+/* ============ SIDEBAR ============ */
+.app-sidebar {
+    background: linear-gradient(180deg, var(--ss-green-dark), var(--ss-green-darker)) !important;
+}
+.sidebar-brand {
+    border-bottom: 1px solid rgba(255, 255, 255, .12);
+}
+.sidebar-brand .brand-link,
+.sidebar-brand .brand-text {
+    color: #fff !important;
+    background: transparent !important;
+}
+.sidebar-brand .brand-image {
+    color: #fff;
+}
+
+.app-sidebar .nav-sidebar .nav-link {
+    color: rgba(255, 255, 255, .82);
+    border-radius: 10px;
+    margin: 2px 10px;
+    padding-left: 14px;
+}
+.app-sidebar .nav-icon {
+    color: rgba(255, 255, 255, .85);
+}
+.app-sidebar .nav-sidebar .nav-link p {
+    color: inherit;
+}
+.app-sidebar .nav-sidebar .nav-link:hover {
+    background: rgba(255, 255, 255, .14) !important;
+    color: #fff !important;
+}
+.app-sidebar .nav-sidebar .nav-link.active {
+    background: var(--ss-accent) !important;
+    color: #fff !important;
+    box-shadow: 0 10px 24px -12px rgba(52, 168, 83, .8);
+}
+.app-sidebar .nav-sidebar .nav-link.active .nav-icon {
+    color: #fff;
+}
+
+/* ============ SIDEBAR OFF-CANVAS (tersembunyi sampai hamburger) ============ */
+/* Default (sidebar-collapse): kolom sidebar dijadikan 0 -> konten full-width,
+   tidak ada kolom kosong / spasi di kiri hamburger. */
+.app-wrapper {
+    grid-template-columns: 0 1fr !important;
+}
+.sidebar-collapse .app-sidebar {
+    margin-left: calc(var(--lte-sidebar-width) * -1) !important;
+    visibility: hidden;
+}
+
+/* Saat kebuka: kembalikan grid 2 kolom normal, sidebar menempati kolom kiri. */
+body:not(.sidebar-collapse) .app-wrapper {
+    grid-template-columns: auto 1fr !important;
+}
+body:not(.sidebar-collapse) .app-sidebar {
+    margin-left: 0 !important;
+    visibility: visible;
+}
+

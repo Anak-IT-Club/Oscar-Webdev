@@ -7,6 +7,7 @@ export default defineConfig({
             input: [
                 'resources/js/adminlte.js',
                 'resources/js/landing.js',
+                'resources/js/dashboard.js',
             ],
             refresh: true,
         }),
