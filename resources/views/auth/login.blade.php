@@ -1,6 +1,7 @@
 @extends('layouts.guest')
 
-@section('title', __('Login'))
+@section('title', __('User Login'))
+@section('brand_name', 'User Login')
 
 @section('content')
     @if (session('status'))
@@ -8,6 +9,15 @@
             {{ session('status') }}
         </div>
     @endif
+
+    <div class="text-center mb-4">
+        <span class="brand-badge d-inline-flex align-items-center justify-content-center mb-2"
+              style="width:54px;height:54px;border-radius:14px;background:linear-gradient(135deg,var(--smart-accent),var(--smart-green-dark));color:#fff;font-size:1.6rem;box-shadow:0 12px 26px -10px rgba(21,95,44,0.6);">
+            <i class="bi bi-recycle"></i>
+        </span>
+        <h1 class="h4 mb-1" style="color:var(--smart-green-darker);font-weight:800;">User Login</h1>
+        <p class="text-muted small mb-0">Silakan masuk untuk melanjutkan ke akun Anda.</p>
+    </div>
 
     <form method="POST" action="{{ route('login') }}">
         @csrf
@@ -44,13 +54,15 @@
             <label class="form-check-label" for="remember">{{ __('Remember Me') }}</label>
         </div>
 
-        <div class="d-flex align-items-center justify-content-between">
-            <button type="submit" class="btn btn-primary">
+        <div class="d-grid mb-3">
+            <button type="submit" class="btn btn-cta-primary btn-auth">
                 <i class="bi bi-box-arrow-in-right me-1"></i> {{ __('Login') }}
             </button>
+        </div>
 
+        <div class="d-flex align-items-center justify-content-between mb-3">
             @if (Route::has('password.request'))
-                <a class="text-decoration-none" href="{{ route('password.request') }}">
+                <a class="auth-link" href="{{ route('password.request') }}">
                     {{ __('Forgot Your Password?') }}
                 </a>
             @endif
@@ -59,7 +71,7 @@
         <hr>
 
         <div class="text-center">
-            <a href="{{ route('register') }}" class="text-decoration-none">{{ __('Register') }}</a>
+            <a href="{{ route('register') }}" class="auth-link">{{ __('Register') }}</a>
         </div>
     </form>
 @endsection
