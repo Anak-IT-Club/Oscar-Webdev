@@ -19,6 +19,12 @@
                             <i class="bi bi-list"></i>
                         </a>
                     </li>
+                    <li class="nav-item d-none d-md-flex align-items-center">
+                        <a class="side-brand" href="{{ url('/') }}">
+                            <span class="badge-logo"><i class="bi bi-recycle"></i></span>
+                            <span>Smart Site</span>
+                        </a>
+                    </li>
                 </ul>
 
                 <ul class="navbar-nav ms-auto">
@@ -47,11 +53,12 @@
         <aside class="app-sidebar">
             <div class="sidebar-brand">
                 <a href="{{ url('/') }}" class="brand-link">
-                    <i class="bi bi-recycle brand-image me-2"></i>
-                    <span class="brand-text fw-light">Smart Site</span>
+                    <span class="brand-badge"><i class="bi bi-recycle"></i></span>
+                    <span class="brand-text">Smart Site</span>
                 </a>
             </div>
             <div class="sidebar-wrapper">
+                <div class="menu-label">Menu</div>
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column sidebar-menu" data-lte-toggle="treeview" role="menu">
                         <li class="nav-item">
@@ -70,6 +77,14 @@
                         @endif
                     </ul>
                 </nav>
+            </div>
+
+            <div class="side-user">
+                <span class="avatar">{{ strtoupper(substr(Auth::user()->nama, 0, 1)) }}</span>
+                <div>
+                    <div class="u-name">{{ Auth::user()->nama }}</div>
+                    <div class="u-role">{{ ucfirst(Auth::user()->role) }}</div>
+                </div>
             </div>
         </aside>
 

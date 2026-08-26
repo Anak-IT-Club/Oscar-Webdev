@@ -1,7 +1,7 @@
 @extends('layouts.landing')
 
 @section('content')
-    @include('welcome.navbar')
+    @include('partials.navbar')
 
     <section id="kontak" class="bg-soft-green" style="padding-top: calc(var(--smart-navbar-h) + 56px); padding-bottom: 72px;">
         <div class="decor-layer" aria-hidden="true">
@@ -100,5 +100,5 @@
         </div>
     </section>
 
-    @include('welcome.footer')
+    @include('partials.footer')
 @endsection

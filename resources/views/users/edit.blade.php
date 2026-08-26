@@ -9,7 +9,7 @@
         </h3>
 
         <form action="{{ route('users.update', $user) }}" method="POST">
-            @include('users._form', ['user' => $user])
+            @include('users.form', ['user' => $user])
 
             <div class="d-flex gap-2 mt-3">
                 <a href="{{ route('users.index') }}" class="btn btn-outline-secondary">

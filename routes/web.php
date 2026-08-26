@@ -5,12 +5,12 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('pages.home');
 });
 
-Route::view('/kontak', 'kontak')->name('kontak');
-Route::view('/tentang', 'tentang')->name('tentang');
-Route::view('/cara-kerja', 'cara-kerja')->name('cara-kerja');
+Route::view('/kontak', 'pages.kontak')->name('kontak');
+Route::view('/tentang', 'pages.tentang')->name('tentang');
+Route::view('/cara-kerja', 'pages.cara-kerja')->name('cara-kerja');
 
 Auth::routes();
 

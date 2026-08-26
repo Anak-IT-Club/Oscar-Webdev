@@ -8,6 +8,7 @@ export default defineConfig({
                 'resources/js/adminlte.js',
                 'resources/js/landing.js',
                 'resources/js/dashboard.js',
+                'resources/js/auth.js',
             ],
             refresh: true,
         }),
