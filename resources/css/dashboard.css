@@ -43,12 +43,18 @@
 .sidebar-brand {
     border-bottom: 1px solid rgba(255, 255, 255, .14);
     padding: 16px;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    text-align: left !important;
 }
 .sidebar-brand .brand-link {
     display: flex;
     align-items: center;
     gap: 10px;
     text-decoration: none;
+    justify-content: flex-start !important;
+    cursor: default;
 }
 .sidebar-brand .brand-badge {
     width: 36px;
@@ -207,9 +213,108 @@
 
 /* ---------- Sidebar off-canvas (tersembunyi sampai hamburger) ---------- */
 .app-wrapper { grid-template-columns: 0 1fr !important; }
+.app-sidebar {
+    box-shadow: none !important;
+    transition: margin-left .25s ease-in-out !important;
+}
 .sidebar-collapse .app-sidebar {
     margin-left: calc(var(--lte-sidebar-width) * -1) !important;
     visibility: hidden;
+    box-shadow: none !important;
+    transition: none !important;
 }
 body:not(.sidebar-collapse) .app-wrapper { grid-template-columns: auto 1fr !important; }
 body:not(.sidebar-collapse) .app-sidebar { margin-left: 0 !important; visibility: visible; }
+
+/* ---------- Profile avatar + crop upload ---------- */
+.profile-avatar { position: relative; display: inline-block; }
+.profile-avatar .rounded-circle {
+    width: 110px; height: 110px; object-fit: cover;
+    display: inline-flex; align-items: center; justify-content: center;
+    background: var(--smart-green-light); color: var(--smart-green);
+    font-size: 2.4rem; font-weight: 800;
+}
+.avatar-actions {
+    position: absolute; bottom: 4px; left: 50%; transform: translateX(-50%);
+    display: flex; gap: 6px;
+}
+.avatar-edit {
+    width: 34px; height: 34px; border-radius: 50%;
+    background: var(--smart-green); color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; box-shadow: 0 2px 6px rgba(0,0,0,.2);
+    transition: background .15s ease;
+}
+.avatar-edit:hover { background: var(--smart-green-dark); }
+.avatar-del {
+    width: 34px; height: 34px; border-radius: 50%;
+    background: #e53935; color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; box-shadow: 0 2px 6px rgba(0,0,0,.2);
+    transition: background .15s ease;
+}
+.avatar-del:hover { background: #c62828; }
+.side-user .avatar img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+
+/* ---------- Responsif (mobile / tablet) ---------- */
+body { overflow-x: hidden; }
+img, svg { max-width: 100%; height: auto; }
+
+.side-user .u-name { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* kartu form (create/edit) konsisten di admin */
+.contact-card {
+    background: #fff;
+    color: var(--smart-text);
+    border: 1px solid #e6efe8;
+    border-radius: 16px;
+    box-shadow: 0 12px 30px -24px rgba(21, 95, 44, .5);
+}
+
+/* tabel info profil responsif (stack di HP) */
+.profile-info th, .profile-info td { vertical-align: top; }
+.profile-info td { word-break: break-word; }
+
+@media (max-width: 991.98px) {
+    .app-wrapper,
+    body.sidebar-collapse .app-wrapper,
+    body:not(.sidebar-collapse) .app-wrapper { grid-template-columns: 1fr !important; }
+    .app-main { padding-left: 0 !important; }
+    .app-sidebar {
+        position: fixed;
+        top: var(--smart-navbar-h, 68px);
+        bottom: 0;
+        left: 0;
+        width: var(--lte-sidebar-width, 250px);
+        z-index: 1040;
+        overflow-y: auto;
+        transform: translateX(-100%);
+        visibility: hidden;
+        transition: transform .25s ease-in-out !important;
+        box-shadow: none !important;
+    }
+    body:not(.sidebar-collapse) .app-sidebar {
+        transform: translateX(0);
+        visibility: visible;
+    }
+    body.sidebar-collapse .app-sidebar { margin-left: 0 !important; }
+    .app-content-wrapper { padding: 16px; }
+
+    /* navbar: hamburger kiri, logo + Smart Site kanan (mobile) */
+    .app-header .navbar .container-fluid > .navbar-nav:first-child { flex: 1 1 auto; }
+    .app-header .side-brand-li { margin-left: auto; }
+}
+
+@media (max-width: 575.98px) {
+    .app-content-wrapper { padding: 12px; }
+    .dash-title { font-size: 1.3rem; }
+    .dash-stat { padding: 16px; gap: 12px; }
+    .dash-stat .icon { width: 46px; height: 46px; font-size: 1.3rem; }
+    .dash-stat .num { font-size: 1.5rem; }
+    .profile-avatar .rounded-circle { width: 92px; height: 92px; font-size: 2rem; }
+    .dash-head { gap: 8px; }
+    .contact-card { padding: 16px !important; }
+    .profile-info tr { display: block; padding: .6rem 0; border-bottom: 1px solid #eef3ee; }
+    .profile-info th, .profile-info td { display: block; width: auto !important; padding: .3rem 0; }
+    .profile-info th { font-weight: 700; color: var(--smart-muted); font-size: .78rem; text-transform: uppercase; letter-spacing: .04em; }
+}

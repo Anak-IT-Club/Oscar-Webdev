@@ -65,9 +65,9 @@
                         </ul>
 
                         <div class="social mt-3">
-                            <a href="#" aria-label="Instagram" class="me-2"><i class="bi bi-instagram"></i></a>
+                            <a href="https://www.instagram.com/itclubsmk?igsi=MWdueWpsYnduZHBsMQ==" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="me-2"><i class="bi bi-instagram"></i></a>
                             <a href="#" aria-label="YouTube" class="me-2"><i class="bi bi-youtube"></i></a>
-                            <a href="#" aria-label="TikTok" class="me-2"><i class="bi bi-tiktok"></i></a>
+                            <a href="https://www.tiktok.com/@itclubsmk?_r=1&amp;_t=ZS-99ETsfIeCPA" target="_blank" rel="noopener noreferrer" aria-label="TikTok" class="me-2"><i class="bi bi-tiktok"></i></a>
                         </div>
                     </div>
                 </div>

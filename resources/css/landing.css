@@ -52,6 +52,10 @@ section {
     display: flex;
     align-items: center;
     gap: 8px;
+    justify-content: flex-start;
+    text-align: left;
+    margin-left: 0;
+    margin-right: auto;
 }
 
 .landing-navbar .navbar-brand .brand-badge {
@@ -638,4 +642,37 @@ section .container,
     border-radius: 20px;
     padding: 1.75rem;
     box-shadow: 0 22px 55px -28px rgba(0, 0, 0, 0.45);
+}
+
+.footer-link {
+    color: rgba(255, 255, 255, .7);
+    text-decoration: none;
+}
+.footer-link:hover {
+    color: #fff;
+    text-decoration: underline;
+}
+
+/* ---------- Responsif global ---------- */
+img, svg { max-width: 100%; height: auto; }
+
+@media (max-width: 575.98px) {
+    .landing-navbar { height: auto; padding-top: 8px; padding-bottom: 8px; }
+    .section-title { font-size: 1.6rem; }
+    .container { padding-left: 16px; padding-right: 16px; }
+    .contact-card { padding: 1.25rem; }
+    section { padding: 48px 0; }
+    .hero { padding-top: calc(var(--smart-navbar-h) + 32px); }
+    .hero-illustration { min-height: 260px; }
+    .hero-illustration .bi { font-size: 5rem; }
+    .hero-illustration .chip-1 { left: 6px; }
+    .hero-illustration .chip-2 { right: 6px; }
+    .step-card { padding: 1.25rem !important; }
+    .impact-card, .testimonial-card { padding: 1.25rem; }
+    .feature-row { flex-direction: column; gap: .5rem; }
+}
+
+@media (max-width: 991.98px) {
+    .section-title { font-size: 1.9rem; }
+    .hero-illustration .bi { font-size: 6rem; }
 }

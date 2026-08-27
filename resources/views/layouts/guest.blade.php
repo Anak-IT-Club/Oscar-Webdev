@@ -8,24 +8,10 @@
     @vite(['resources/js/auth.js'])
 </head>
 <body class="auth-page">
+    <a class="auth-back" href="{{ url('/') }}" title="Kembali ke beranda">
+        <i class="bi bi-arrow-left me-1"></i> Kembali
+    </a>
     <div class="auth-wrap">
-        <aside class="auth-aside">
-            <div class="auth-aside-inner">
-                <a class="auth-brand" href="{{ url('/') }}">
-                    <span class="brand-badge"><i class="bi bi-recycle"></i></span>
-                    <span>Smart Site</span>
-                </a>
-                <h2 class="auth-aside-title">Tong Sampah Pintar untuk Sekolah Hijau</h2>
-                <p class="auth-aside-text">Sistem berbasis IoT &amp; AI yang membantu siswa memilah sampah dan mengumpulkan poin otomatis.</p>
-                <div class="auth-chips">
-                    <span class="auth-chip"><i class="bi bi-cpu me-1"></i> AI Detection</span>
-                    <span class="auth-chip"><i class="bi bi-award me-1"></i> + Poin</span>
-                    <span class="auth-chip"><i class="bi bi-tree me-1"></i> Eco Friendly</span>
-                </div>
-            </div>
-            <i class="bi bi-recycle auth-decor"></i>
-        </aside>
-
         <main class="auth-main">
             <div class="auth-card-wrap">
                 <div class="card auth-card">

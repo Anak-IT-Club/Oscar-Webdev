@@ -63,5 +63,9 @@
         <button type="submit" class="btn btn-cta-primary w-100">
             <i class="bi bi-person-plus me-1"></i> {{ __('Register') }}
         </button>
+
+        <div class="text-center mt-3">
+            <a href="{{ route('login') }}" class="auth-link">{{ __('Sudah punya akun? Login') }}</a>
+        </div>
     </form>
 @endsection

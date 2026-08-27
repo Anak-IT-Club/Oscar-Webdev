@@ -4,7 +4,7 @@
 
 .auth-page {
     min-height: 100vh;
-    background: linear-gradient(180deg, var(--smart-green-light) 0%, #ffffff 100%);
+    background: #f4f8f5;
     font-family: "Segoe UI", system-ui, -apple-system, Roboto, Helvetica, Arial, sans-serif;
     color: var(--smart-text);
 }
@@ -128,4 +128,35 @@
 @media (max-width: 991.98px) {
     .auth-aside { display: none; }
     .auth-main { padding: 24px; }
+}
+
+/* tombol kembali (panah kiri) ke landing page */
+.auth-back {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 10;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: .9rem;
+    color: var(--smart-green-dark);
+    background: #fff;
+    border: 1px solid #d8e8dc;
+    box-shadow: 0 6px 16px -8px rgba(21, 95, 44, .4);
+    text-decoration: none;
+    transition: background .15s ease, color .15s ease;
+}
+.auth-back:hover { background: var(--smart-green); color: #fff; }
+
+/* ---------- Responsif global ---------- */
+img, svg { max-width: 100%; height: auto; }
+
+@media (max-width: 575.98px) {
+    .auth-main { padding: 16px; }
+    .auth-card .card-body { padding: 1.25rem !important; }
+    .auth-back { top: 12px; left: 12px; }
 }

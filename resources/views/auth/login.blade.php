@@ -20,9 +20,9 @@
             <label for="email" class="form-label">{{ __('Email Address') }}</label>
             <div class="input-group">
                 <span class="input-group-text"><i class="bi bi-envelope"></i></span>
-                <input id="email" type="email"
-                       class="form-control @error('email') is-invalid @enderror"
-                       name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                 <input id="email" type="email"
+                        class="form-control @error('email') is-invalid @enderror"
+                        name="email" value="{{ old('email', request()->cookie('remember_email')) }}" required autocomplete="email" autofocus>
                 @error('email')
                     <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                 @enderror
@@ -43,7 +43,7 @@
         </div>
 
         <div class="mb-4 form-check">
-            <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+            <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ (old('remember') || request()->cookie('remember_email')) ? 'checked' : '' }}>
             <label class="form-check-label" for="remember">{{ __('Remember Me') }}</label>
         </div>
 

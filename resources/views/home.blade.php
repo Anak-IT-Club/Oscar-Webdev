@@ -96,6 +96,7 @@
                     <h2 class="dash-title h5">Yuk buang sampah dengan benar 🌱</h2>
                     <p class="dash-sub mb-3">Setiap kali kamu memilah sampah di tong pintar, poin otomatis bertambah. Terus jaga lingkungan sekolah!</p>
                     <a href="{{ route('cara-kerja') }}" class="btn btn-cta-ghost">Cara kerja tong pintar</a>
+                    <a href="{{ route('redeem.index') }}" class="btn btn-cta-primary">Tukar Poin</a>
                 </div>
             </div>
             <div class="col-lg-4">
