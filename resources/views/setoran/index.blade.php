@@ -101,7 +101,7 @@
                                 @if ($setoran->sumber === 'ai')
                                     <span class="badge text-bg-info"><i class="bi bi-robot me-1"></i>AI</span>
                                 @elseif ($setoran->sumber === 'smartbin')
-                                    <span class="badge text-bg-primary"><i class="bi bi-cpu me-1"></i>SmartBin</span>
+                                    <span class="badge text-bg-primary"><i class="bi bi-cpu me-1"></i>SMARTBIN</span>
                                 @else
                                     <span class="badge text-bg-secondary">Manual</span>
                                 @endif
