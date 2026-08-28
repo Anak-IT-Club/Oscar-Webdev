@@ -107,6 +107,12 @@
                         </li>
                         @endif
                         <li class="nav-item">
+                            <a href="{{ route('leaderboard.index') }}" class="nav-link {{ request()->routeIs('leaderboard.*') ? 'active' : '' }}">
+                                <i class="nav-icon bi bi-trophy-fill"></i>
+                                <p>Leaderboard</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="{{ route('profile.index') }}" class="nav-link {{ request()->routeIs('profile.*') ? 'active' : '' }}">
                                 <i class="nav-icon bi bi-person-circle"></i>
                                 <p>Profil</p>
