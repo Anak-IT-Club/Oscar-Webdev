@@ -105,7 +105,8 @@
 }
 
 .app-sidebar .nav-sidebar .nav-link {
-    color: rgba(255, 255, 255, .85);
+    /* !important untuk mengalahkan warna teks default AdminLTE yang gelap */
+    color: rgba(255, 255, 255, .9) !important;
     border-radius: 12px;
     padding: 10px 12px;
     margin: 2px 0;
@@ -116,7 +117,7 @@
 
 .app-sidebar .nav-sidebar .nav-link p {
     margin: 0;
-    color: inherit;
+    color: rgba(255, 255, 255, .9) !important;
 }
 
 .app-sidebar .nav-sidebar .nav-icon {
@@ -126,17 +127,25 @@
 
 .app-sidebar .nav-sidebar .nav-link:hover {
     background: rgba(255, 255, 255, .14) !important;
-    color: #fff;
+}
+
+.app-sidebar .nav-sidebar .nav-link:hover,
+.app-sidebar .nav-sidebar .nav-link:hover p {
+    color: #fff !important;
 }
 
 .app-sidebar .nav-sidebar .nav-link.active {
     background: #fff !important;
-    color: var(--smart-green-dark) !important;
     box-shadow: 0 12px 26px -14px rgba(0, 0, 0, .55);
 }
 
+.app-sidebar .nav-sidebar .nav-link.active,
+.app-sidebar .nav-sidebar .nav-link.active p {
+    color: var(--smart-green-dark) !important;
+}
+
 .app-sidebar .nav-sidebar .nav-link.active .nav-icon {
-    color: var(--smart-green);
+    color: var(--smart-green) !important;
 }
 
 
