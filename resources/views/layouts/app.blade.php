@@ -81,6 +81,12 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a href="{{ route('setoran.index') }}" class="nav-link {{ request()->routeIs('setoran.*') ? 'active' : '' }}">
+                                <i class="nav-icon bi bi-arrow-down-circle"></i>
+                                <p>Setoran</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="{{ route('hadiah.index') }}" class="nav-link {{ request()->routeIs('hadiah.*') ? 'active' : '' }}">
                                 <i class="nav-icon bi bi-gift"></i>
                                 <p>Hadiah</p>

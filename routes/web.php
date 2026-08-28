@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SampahController;
+use App\Http\Controllers\SetoranController;
 use App\Http\Controllers\HadiahController;
 use App\Http\Controllers\RedeemController;
 use App\Http\Controllers\ProfileController;
@@ -28,6 +29,7 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('users', UserController::class)->except(['show']);
     Route::resource('sampah', SampahController::class)->except(['show']);
+    Route::resource('setoran', SetoranController::class)->only(['index', 'create', 'store', 'destroy']);
     Route::resource('hadiah', HadiahController::class)->except(['show']);
 
     Route::get('/redeem', [RedeemController::class, 'index'])->name('redeem.index');

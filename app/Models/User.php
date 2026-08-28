@@ -67,4 +67,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(TukarPoin::class);
     }
+
+    public function setoran()
+    {
+        return $this->hasMany(Setoran::class);
+    }
 }
