@@ -31,28 +31,28 @@
                                 <span class="ci-icon"><i class="bi bi-mortarboard"></i></span>
                                 <div>
                                     <div class="fw-semibold" style="color:var(--smart-green-dark)">Smart Site - SMK Islam Malahayati</div>
-                                    <div class="small">Proyek siswa jurusan Rekayasa Perangkat Lunak</div>
+                                    <div class="small">Proyek siswa jurusan Teknik Jaringan Komputer dan Telekomunikasi</div>
                                 </div>
                             </li>
                             <li>
                                 <span class="ci-icon"><i class="bi bi-geo-alt"></i></span>
                                 <div>
                                     <div class="fw-semibold" style="color:var(--smart-green-dark)">Alamat</div>
-                                    <div class="small">Jl. Pendidikan No. 1, Kota Contoh (placeholder)</div>
+                                    <div class="small">Jalan Bima No.3, RT.8/RW.7, Cijantung, Pasar Rebo, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta 13770</div>
                                 </div>
                             </li>
                             <li>
                                 <span class="ci-icon"><i class="bi bi-envelope"></i></span>
                                 <div>
                                     <div class="fw-semibold" style="color:var(--smart-green-dark)">Email</div>
-                                    <div class="small">smart.site@malahayati.sch.id</div>
+                                    <div class="small">info@itclub.id</div>
                                 </div>
                             </li>
                             <li>
                                 <span class="ci-icon"><i class="bi bi-telephone"></i></span>
                                 <div>
                                     <div class="fw-semibold" style="color:var(--smart-green-dark)">WhatsApp</div>
-                                    <div class="small">0812-3456-7890 (placeholder)</div>
+                                    <div class="small">0812-3456-7890</div>
                                 </div>
                             </li>
                             <li>
@@ -63,12 +63,6 @@
                                 </div>
                             </li>
                         </ul>
-
-                        <div class="social mt-3">
-                            <a href="https://www.instagram.com/itclubsmk?igsi=MWdueWpsYnduZHBsMQ==" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="me-2"><i class="bi bi-instagram"></i></a>
-                            <a href="#" aria-label="YouTube" class="me-2"><i class="bi bi-youtube"></i></a>
-                            <a href="https://www.tiktok.com/@itclubsmk?_r=1&amp;_t=ZS-99ETsfIeCPA" target="_blank" rel="noopener noreferrer" aria-label="TikTok" class="me-2"><i class="bi bi-tiktok"></i></a>
-                        </div>
                     </div>
                 </div>
 
