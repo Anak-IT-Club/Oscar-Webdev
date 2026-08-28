@@ -35,7 +35,7 @@ class DatabaseSeeder extends Seeder
                 'nisn' => 'SIS001',
                 'nama' => 'Siswa Contoh',
                 'kelas' => 'XII RPL',
-                'jurusan' => 'Rekayasa Perangkat Lunak',
+                'jurusan' => 'Teknik Jaringan Komputer dan Telekomunikasi',
                 'no_hp' => '081298765432',
                 'poin' => 50,
                 'role' => 'siswa',
