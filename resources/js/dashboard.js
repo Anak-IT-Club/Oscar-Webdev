@@ -6,9 +6,11 @@ import '../css/landing.css';
 import * as bootstrap from 'bootstrap';
 import Cropper from 'cropperjs';
 import 'cropperjs/dist/cropper.min.css';
+import Chart from 'chart.js/auto';
 
 window.bootstrap = bootstrap;
 window.Cropper = Cropper;
+window.Chart = Chart;
 
 /* Reveal-on-scroll for .reveal elements (respects reduced-motion) */
 document.addEventListener('DOMContentLoaded', function () {
