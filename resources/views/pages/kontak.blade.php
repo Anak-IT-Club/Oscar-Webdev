@@ -30,7 +30,7 @@
                             <li>
                                 <span class="ci-icon"><i class="bi bi-mortarboard"></i></span>
                                 <div>
-                                    <div class="fw-semibold" style="color:var(--smart-green-dark)">Smart Site &mdash; SMK Islam Malahayati</div>
+                                    <div class="fw-semibold" style="color:var(--smart-green-dark)">Smart Site - SMK Islam Malahayati</div>
                                     <div class="small">Proyek siswa jurusan Rekayasa Perangkat Lunak</div>
                                 </div>
                             </li>
