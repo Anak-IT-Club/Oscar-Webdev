@@ -4,8 +4,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SampahController;
+use App\Http\Controllers\SetoranController;
 use App\Http\Controllers\HadiahController;
 use App\Http\Controllers\RedeemController;
+use App\Http\Controllers\ScannerController;
+use App\Http\Controllers\LeaderboardController;
 use App\Http\Controllers\ProfileController;
 
 Route::get('/', function () {
@@ -28,8 +31,15 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('users', UserController::class)->except(['show']);
     Route::resource('sampah', SampahController::class)->except(['show']);
+    Route::resource('setoran', SetoranController::class)->only(['index', 'create', 'store', 'destroy']);
     Route::resource('hadiah', HadiahController::class)->except(['show']);
 
     Route::get('/redeem', [RedeemController::class, 'index'])->name('redeem.index');
     Route::post('/redeem', [RedeemController::class, 'store'])->name('redeem.store');
+
+    Route::get('/leaderboard', [LeaderboardController::class, 'index'])->name('leaderboard.index');
+
+    Route::get('/scan', [ScannerController::class, 'index'])->name('scanner.index');
+    Route::post('/scan/analyze', [ScannerController::class, 'analyze'])->name('scanner.analyze');
+    Route::post('/scan/store', [ScannerController::class, 'store'])->name('scanner.store');
 });

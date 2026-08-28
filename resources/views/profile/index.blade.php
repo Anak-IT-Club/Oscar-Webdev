@@ -85,8 +85,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                    <button type="button" class="btn btn-success" id="cropSave">Pasang</button>
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="button" class="btn btn-cta-primary" id="cropSave">Pasang</button>
                 </div>
             </div>
         </div>

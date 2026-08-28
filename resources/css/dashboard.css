@@ -105,7 +105,8 @@
 }
 
 .app-sidebar .nav-sidebar .nav-link {
-    color: rgba(255, 255, 255, .85);
+    /* !important untuk mengalahkan warna teks default AdminLTE yang gelap */
+    color: rgba(255, 255, 255, .9) !important;
     border-radius: 12px;
     padding: 10px 12px;
     margin: 2px 0;
@@ -116,7 +117,7 @@
 
 .app-sidebar .nav-sidebar .nav-link p {
     margin: 0;
-    color: inherit;
+    color: rgba(255, 255, 255, .9) !important;
 }
 
 .app-sidebar .nav-sidebar .nav-icon {
@@ -126,17 +127,25 @@
 
 .app-sidebar .nav-sidebar .nav-link:hover {
     background: rgba(255, 255, 255, .14) !important;
-    color: #fff;
+}
+
+.app-sidebar .nav-sidebar .nav-link:hover,
+.app-sidebar .nav-sidebar .nav-link:hover p {
+    color: #fff !important;
 }
 
 .app-sidebar .nav-sidebar .nav-link.active {
     background: #fff !important;
-    color: var(--smart-green-dark) !important;
     box-shadow: 0 12px 26px -14px rgba(0, 0, 0, .55);
 }
 
+.app-sidebar .nav-sidebar .nav-link.active,
+.app-sidebar .nav-sidebar .nav-link.active p {
+    color: var(--smart-green-dark) !important;
+}
+
 .app-sidebar .nav-sidebar .nav-link.active .nav-icon {
-    color: var(--smart-green);
+    color: var(--smart-green) !important;
 }
 
 
@@ -252,6 +261,16 @@
     color: var(--smart-green);
 }
 
+/* Ikon bulat hijau untuk kartu non-stat (mis. kartu hadiah di Redeem) */
+.dash-card .icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 14px;
+    background: var(--smart-green-light);
+    color: var(--smart-green);
+}
+
 .dash-stat .num {
     font-size: 1.9rem;
     font-weight: 800;
@@ -312,31 +331,26 @@
 }
 
 
-/* ---------- Sidebar off-canvas (tersembunyi sampai hamburger) ---------- */
+/* ---------- Sidebar: tampil default di desktop, toggle untuk sembunyikan ---------- */
 
 .app-wrapper {
-    grid-template-columns: 0 1fr !important;
+    grid-template-columns: var(--lte-sidebar-width, 250px) 1fr !important;
 }
 
 .app-sidebar {
     box-shadow: none !important;
+    margin-left: 0;
+    visibility: visible;
     transition: margin-left .25s ease-in-out !important;
 }
 
-.sidebar-collapse .app-sidebar {
-    margin-left: calc(var(--lte-sidebar-width) * -1) !important;
+body.sidebar-collapse .app-wrapper {
+    grid-template-columns: 0 1fr !important;
+}
+
+body.sidebar-collapse .app-sidebar {
+    margin-left: calc(var(--lte-sidebar-width, 250px) * -1) !important;
     visibility: hidden;
-    box-shadow: none !important;
-    transition: none !important;
-}
-
-body:not(.sidebar-collapse) .app-wrapper {
-    grid-template-columns: auto 1fr !important;
-}
-
-body:not(.sidebar-collapse) .app-sidebar {
-    margin-left: 0 !important;
-    visibility: visible;
 }
 
 
@@ -456,13 +470,14 @@ svg {
 
 @media (max-width: 991.98px) {
     .app-wrapper,
-    body.sidebar-collapse .app-wrapper,
-    body:not(.sidebar-collapse) .app-wrapper {
+    body.sidebar-collapse .app-wrapper {
         grid-template-columns: 1fr !important;
     }
     .app-main {
         padding-left: 0 !important;
     }
+    /* Di mobile sidebar jadi overlay. AdminLTE menambah 'sidebar-collapse'
+       otomatis saat load, jadi pemetaannya konsisten: collapse = tersembunyi. */
     .app-sidebar {
         position: fixed;
         top: var(--smart-navbar-h, 68px);
@@ -471,17 +486,15 @@ svg {
         width: var(--lte-sidebar-width, 250px);
         z-index: 1040;
         overflow-y: auto;
-        transform: translateX(-100%);
-        visibility: hidden;
-        transition: transform .25s ease-in-out !important;
-        box-shadow: none !important;
-    }
-    body:not(.sidebar-collapse) .app-sidebar {
-        transform: translateX(0);
+        margin-left: 0 !important;
+        transform: translateX(0) !important;
         visibility: visible;
+        transition: transform .25s ease-in-out !important;
+        box-shadow: 0 20px 50px -20px rgba(0, 0, 0, .5) !important;
     }
     body.sidebar-collapse .app-sidebar {
-        margin-left: 0 !important;
+        transform: translateX(-100%) !important;
+        visibility: hidden;
     }
     .app-content-wrapper {
         padding: 16px;

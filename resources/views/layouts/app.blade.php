@@ -7,7 +7,7 @@
     <title>@yield('title', 'Smart Site')</title>
     @vite(['resources/js/adminlte.js', 'resources/js/dashboard.js'])
 </head>
-<body class="app sidebar-collapse">
+<body class="app">
     <div class="app-wrapper">
 
         {{-- Navbar --}}
@@ -81,6 +81,12 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a href="{{ route('setoran.index') }}" class="nav-link {{ request()->routeIs('setoran.*') ? 'active' : '' }}">
+                                <i class="nav-icon bi bi-arrow-down-circle"></i>
+                                <p>Setoran</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="{{ route('hadiah.index') }}" class="nav-link {{ request()->routeIs('hadiah.*') ? 'active' : '' }}">
                                 <i class="nav-icon bi bi-gift"></i>
                                 <p>Hadiah</p>
@@ -88,12 +94,24 @@
                         </li>
                         @else
                         <li class="nav-item">
+                            <a href="{{ route('scanner.index') }}" class="nav-link {{ request()->routeIs('scanner.*') ? 'active' : '' }}">
+                                <i class="nav-icon bi bi-camera-fill"></i>
+                                <p>Scan Sampah (AI)</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="{{ route('redeem.index') }}" class="nav-link {{ request()->routeIs('redeem.*') ? 'active' : '' }}">
                                 <i class="nav-icon bi bi-gift"></i>
                                 <p>Redeem Poin</p>
                             </a>
                         </li>
                         @endif
+                        <li class="nav-item">
+                            <a href="{{ route('leaderboard.index') }}" class="nav-link {{ request()->routeIs('leaderboard.*') ? 'active' : '' }}">
+                                <i class="nav-icon bi bi-trophy-fill"></i>
+                                <p>Leaderboard</p>
+                            </a>
+                        </li>
                         <li class="nav-item">
                             <a href="{{ route('profile.index') }}" class="nav-link {{ request()->routeIs('profile.*') ? 'active' : '' }}">
                                 <i class="nav-icon bi bi-person-circle"></i>

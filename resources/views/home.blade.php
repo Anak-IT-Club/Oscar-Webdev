@@ -59,6 +59,72 @@
                 </div>
             </div>
         </div>
+
+        <div class="row g-3 mt-1">
+            <div class="col-lg-5">
+                <div class="dash-card p-4 h-100">
+                    <h2 class="dash-title h6 mb-3">Poin per Jenis Sampah</h2>
+                    <canvas id="chartJenis" height="220"
+                            data-labels='@json($jenisLabels)' data-values='@json($jenisData)'></canvas>
+                </div>
+            </div>
+            <div class="col-lg-7">
+                <div class="dash-card p-4 h-100">
+                    <h2 class="dash-title h6 mb-3">Tren Setoran 7 Hari Terakhir</h2>
+                    <canvas id="chartTren" height="220"
+                            data-labels='@json($trenLabels)' data-values='@json($trenData)'></canvas>
+                </div>
+            </div>
+        </div>
+
+        @push('scripts')
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                if (typeof window.Chart === 'undefined') return;
+                var green = '#1f7a3d', accent = '#34a853';
+
+                var cj = document.getElementById('chartJenis');
+                if (cj) {
+                    new window.Chart(cj, {
+                        type: 'doughnut',
+                        data: {
+                            labels: JSON.parse(cj.dataset.labels),
+                            datasets: [{
+                                data: JSON.parse(cj.dataset.values),
+                                backgroundColor: ['#34a853', '#1f7a3d', '#0f4821', '#8bc34a'],
+                                borderWidth: 0
+                            }]
+                        },
+                        options: {
+                            plugins: { legend: { position: 'bottom' } },
+                            cutout: '62%'
+                        }
+                    });
+                }
+
+                var ct = document.getElementById('chartTren');
+                if (ct) {
+                    new window.Chart(ct, {
+                        type: 'bar',
+                        data: {
+                            labels: JSON.parse(ct.dataset.labels),
+                            datasets: [{
+                                label: 'Poin',
+                                data: JSON.parse(ct.dataset.values),
+                                backgroundColor: accent,
+                                borderRadius: 6,
+                                maxBarThickness: 42
+                            }]
+                        },
+                        options: {
+                            plugins: { legend: { display: false } },
+                            scales: { y: { beginAtZero: true, ticks: { precision: 0 } } }
+                        }
+                    });
+                }
+            });
+        </script>
+        @endpush
     @else
         <div class="row g-3">
             <div class="col-sm-6 col-xl-4">

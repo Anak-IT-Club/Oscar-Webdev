@@ -22,7 +22,7 @@
         </div>
 
         <div class="d-flex align-items-center justify-content-between">
-            <button type="submit" class="btn btn-primary">
+            <button type="submit" class="btn btn-cta-primary">
                 <i class="bi bi-shield-check me-1"></i> {{ __('Confirm Password') }}
             </button>
 

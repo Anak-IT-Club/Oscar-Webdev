@@ -23,6 +23,7 @@
         "esbuild@0.28.2": true
     },
     "dependencies": {
+        "chart.js": "^4.5.1",
         "cropperjs": "^1.6.2"
     }
 }
