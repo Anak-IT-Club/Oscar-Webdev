@@ -11,9 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->unsignedInteger('poin')->default(0)->after('email_verified_at');
-        });
+        if (! Schema::hasColumn('users', 'poin')) {
+            Schema::table('users', function (Blueprint $table) {
+                $table->unsignedInteger('poin')->default(0)->after('email_verified_at');
+            });
+        }
     }
 
     /**
