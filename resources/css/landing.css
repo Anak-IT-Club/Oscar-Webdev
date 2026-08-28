@@ -124,7 +124,10 @@ section {
     font-size: 1.12rem;
 }
 
-.hero .btn-cta-primary {
+/* Tombol CTA — generik (dipakai di landing, dashboard, & auth).
+   Ditulis sebagai .btn.btn-cta-* agar mengalahkan aturan dasar Bootstrap
+   `.btn` yang ter-bundle belakangan, apa pun urutan pemuatan CSS-nya. */
+.btn.btn-cta-primary {
     background: var(--smart-green);
     border-color: var(--smart-green);
     color: #fff;
@@ -133,21 +136,24 @@ section {
     padding: 0.7rem 1.6rem;
 }
 
-.hero .btn-cta-primary:hover {
+.btn.btn-cta-primary:hover,
+.btn.btn-cta-primary:focus {
     background: var(--smart-green-dark);
     border-color: var(--smart-green-dark);
     color: #fff;
 }
 
-.hero .btn-cta-ghost {
+.btn.btn-cta-ghost {
+    background: transparent;
+    border: 1px solid var(--smart-green);
     border-radius: 999px;
     padding: 0.7rem 1.6rem;
     font-weight: 600;
     color: var(--smart-green-dark);
-    border-color: var(--smart-green);
 }
 
-.hero .btn-cta-ghost:hover {
+.btn.btn-cta-ghost:hover,
+.btn.btn-cta-ghost:focus {
     background: var(--smart-green-light);
     color: var(--smart-green-dark);
 }
