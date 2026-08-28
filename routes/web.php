@@ -7,6 +7,7 @@ use App\Http\Controllers\SampahController;
 use App\Http\Controllers\SetoranController;
 use App\Http\Controllers\HadiahController;
 use App\Http\Controllers\RedeemController;
+use App\Http\Controllers\ScannerController;
 use App\Http\Controllers\ProfileController;
 
 Route::get('/', function () {
@@ -34,4 +35,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/redeem', [RedeemController::class, 'index'])->name('redeem.index');
     Route::post('/redeem', [RedeemController::class, 'store'])->name('redeem.store');
+
+    Route::get('/scan', [ScannerController::class, 'index'])->name('scanner.index');
+    Route::post('/scan/analyze', [ScannerController::class, 'analyze'])->name('scanner.analyze');
+    Route::post('/scan/store', [ScannerController::class, 'store'])->name('scanner.store');
 });

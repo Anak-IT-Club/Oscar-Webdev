@@ -94,6 +94,12 @@
                         </li>
                         @else
                         <li class="nav-item">
+                            <a href="{{ route('scanner.index') }}" class="nav-link {{ request()->routeIs('scanner.*') ? 'active' : '' }}">
+                                <i class="nav-icon bi bi-camera-fill"></i>
+                                <p>Scan Sampah (AI)</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="{{ route('redeem.index') }}" class="nav-link {{ request()->routeIs('redeem.*') ? 'active' : '' }}">
                                 <i class="nav-icon bi bi-gift"></i>
                                 <p>Redeem Poin</p>
