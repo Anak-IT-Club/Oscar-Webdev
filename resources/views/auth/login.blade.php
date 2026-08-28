@@ -13,7 +13,7 @@
         <p class="auth-head-sub">Silakan masuk untuk melanjutkan ke akun Anda.</p>
     </div>
 
-    <form method="POST" action="{{ route('login') }}">
+    <form method="POST" action="{{ route('login') }}" autocomplete="off">
         @csrf
 
         <div class="mb-3">
@@ -22,10 +22,10 @@
                 <span class="input-group-text"><i class="bi bi-envelope"></i></span>
                  <input id="email" type="email"
                         class="form-control @error('email') is-invalid @enderror"
-                        name="email" value="{{ old('email', request()->cookie('remember_email')) }}" required autocomplete="email" autofocus>
-                @error('email')
-                    <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
-                @enderror
+                        name="email" value="{{ old('email', request()->cookie('remember_email')) }}" required autocomplete="off" autofocus readonly onfocus="this.removeAttribute('readonly')">
+                 @error('email')
+                     <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+                 @enderror
             </div>
         </div>
 
@@ -35,10 +35,10 @@
                 <span class="input-group-text"><i class="bi bi-lock"></i></span>
                 <input id="password" type="password"
                        class="form-control @error('password') is-invalid @enderror"
-                       name="password" required autocomplete="current-password">
-                @error('password')
-                    <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
-                @enderror
+                       name="password" required autocomplete="off" readonly onfocus="this.removeAttribute('readonly')">
+                 @error('password')
+                     <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+                 @enderror
             </div>
         </div>
 
