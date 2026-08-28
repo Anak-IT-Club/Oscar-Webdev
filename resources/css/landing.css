@@ -36,7 +36,9 @@ section {
     margin: 0 auto 40px;
 }
 
+
 /* ---------- Navbar ---------- */
+
 .landing-navbar {
     height: var(--smart-navbar-h);
     background: rgba(255, 255, 255, 0.96);
@@ -98,12 +100,12 @@ section {
     color: #fff;
 }
 
+
 /* ---------- Hero ---------- */
+
 .hero {
     position: relative;
-    background:
-        radial-gradient(1200px 500px at 85% -10%, rgba(52, 168, 83, 0.18), transparent 60%),
-        linear-gradient(180deg, var(--smart-green-light) 0%, #ffffff 100%);
+    background: radial-gradient(1200px 500px at 85% -10%, rgba(52, 168, 83, 0.18), transparent 60%), linear-gradient(180deg, var(--smart-green-light) 0%, #ffffff 100%);
     padding-top: calc(var(--smart-navbar-h) + 56px);
     overflow: hidden;
 }
@@ -124,9 +126,11 @@ section {
     font-size: 1.12rem;
 }
 
-/* Tombol CTA — generik (dipakai di landing, dashboard, & auth).
+
+/* Tombol CTA - generik (dipakai di landing, dashboard, & auth).
    Ditulis sebagai .btn.btn-cta-* agar mengalahkan aturan dasar Bootstrap
    `.btn` yang ter-bundle belakangan, apa pun urutan pemuatan CSS-nya. */
+
 .btn.btn-cta-primary {
     background: var(--smart-green);
     border-color: var(--smart-green);
@@ -186,10 +190,19 @@ section {
     box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.25);
 }
 
-.hero-illustration .chip-1 { top: 22px; left: -14px; }
-.hero-illustration .chip-2 { bottom: 26px; right: -10px; }
+.hero-illustration .chip-1 {
+    top: 22px;
+    left: -14px;
+}
+
+.hero-illustration .chip-2 {
+    bottom: 26px;
+    right: -10px;
+}
+
 
 /* ---------- Generic Cards ---------- */
+
 .feature-card,
 .step-card {
     border: 1px solid #e6efe8;
@@ -244,7 +257,9 @@ section {
     margin-bottom: 0.5rem;
 }
 
+
 /* ---------- Stats ---------- */
+
 .stats {
     background: linear-gradient(135deg, var(--smart-green-dark), var(--smart-green-darker));
     color: #fff;
@@ -261,7 +276,9 @@ section {
     font-size: 0.95rem;
 }
 
+
 /* ---------- Footer ---------- */
+
 .landing-footer {
     background: var(--smart-green-darker);
     color: rgba(255, 255, 255, 0.82);
@@ -297,14 +314,18 @@ section {
     background: var(--smart-green-light);
 }
 
+
 /* ---------- Layered content above decorations ---------- */
+
 section .container,
 .hero .container {
     position: relative;
     z-index: 1;
 }
 
+
 /* ---------- Background Decorations (theme: leaves / recycle) ---------- */
+
 .decor-layer {
     position: absolute;
     inset: 0;
@@ -328,7 +349,9 @@ section .container,
     opacity: 0.06;
 }
 
+
 /* soft organic blobs + dotted grid for texture */
+
 .hero .blob {
     position: absolute;
     border-radius: 50%;
@@ -357,10 +380,17 @@ section .container,
     background-size: 24px 24px;
 }
 
+
 /* ---------- Animations ---------- */
+
 @keyframes floaty {
-    0%, 100% { transform: translateY(0) rotate(var(--rot, 0deg)); }
-    50% { transform: translateY(-16px) rotate(var(--rot, 0deg)); }
+    0%,
+    100% {
+        transform: translateY(0) rotate(var(--rot, 0deg));
+    }
+    50% {
+        transform: translateY(-16px) rotate(var(--rot, 0deg));
+    }
 }
 
 .float {
@@ -368,14 +398,18 @@ section .container,
 }
 
 @keyframes spinslow {
-    to { transform: rotate(360deg); }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 .spin-slow {
     animation: spinslow 42s linear infinite;
 }
 
+
 /* ---------- Reveal on scroll ---------- */
+
 .reveal {
     opacity: 0;
     transform: translateY(28px);
@@ -388,12 +422,23 @@ section .container,
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .reveal { opacity: 1 !important; transform: none !important; transition: none; }
-    .float, .spin-slow { animation: none !important; }
+    .reveal {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none;
+    }
+    .float,
+    .spin-slow {
+        animation: none !important;
+    }
 }
 
+
 /* ---------- Avatar stack (trust element) ---------- */
-.avatar-stack { display: flex; }
+
+.avatar-stack {
+    display: flex;
+}
 
 .avatar-stack .avatar {
     width: 38px;
@@ -410,9 +455,13 @@ section .container,
     font-size: 0.78rem;
 }
 
-.avatar-stack .avatar:first-child { margin-left: 0; }
+.avatar-stack .avatar:first-child {
+    margin-left: 0;
+}
+
 
 /* subtle organic curve divider at hero bottom */
+
 .hero-wave {
     position: absolute;
     left: 0;
@@ -424,7 +473,9 @@ section .container,
     display: block;
 }
 
+
 /* ---------- Fitur: bento + "live" scanner mock ---------- */
+
 .tech-pill {
     display: inline-block;
     font-size: 0.72rem;
@@ -472,9 +523,15 @@ section .container,
 }
 
 @keyframes scanmove {
-    0% { top: 12%; }
-    50% { top: 86%; }
-    100% { top: 12%; }
+    0% {
+        top: 12%;
+    }
+    50% {
+        top: 86%;
+    }
+    100% {
+        top: 12%;
+    }
 }
 
 .scanner-mock .badge-cls {
@@ -486,21 +543,45 @@ section .container,
     backdrop-filter: blur(4px);
 }
 
-.badge-cls.organik { top: 12px; left: 12px; background: rgba(52, 168, 83, 0.9); color: #fff; }
-.badge-cls.anorganik { bottom: 12px; right: 12px; background: rgba(255, 255, 255, 0.9); color: #155f2c; }
+.badge-cls.organik {
+    top: 12px;
+    left: 12px;
+    background: rgba(52, 168, 83, 0.9);
+    color: #fff;
+}
 
-.reward-progress .progress { height: 10px; background: #e6efe8; }
-.reward-progress .progress-bar { background: var(--smart-accent); }
+.badge-cls.anorganik {
+    bottom: 12px;
+    right: 12px;
+    background: rgba(255, 255, 255, 0.9);
+    color: #155f2c;
+}
+
+.reward-progress .progress {
+    height: 10px;
+    background: #e6efe8;
+}
+
+.reward-progress .progress-bar {
+    background: var(--smart-accent);
+}
+
 
 /* compact feature row (icon left) */
+
 .feature-inline {
     display: flex;
     gap: 1rem;
     align-items: flex-start;
 }
-.feature-inline .icon-wrap { flex: 0 0 auto; }
+
+.feature-inline .icon-wrap {
+    flex: 0 0 auto;
+}
+
 
 /* ---------- Dampak: report card + testimonial ---------- */
+
 .stats .impact-card {
     background: #fff;
     color: var(--smart-text);
@@ -527,7 +608,9 @@ section .container,
     font-weight: 700;
 }
 
-.trend.up { color: var(--smart-accent); }
+.trend.up {
+    color: var(--smart-accent);
+}
 
 .mini-chart {
     display: flex;
@@ -585,10 +668,15 @@ section .container,
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .scan-line { animation: none !important; top: 50% !important; }
+    .scan-line {
+        animation: none !important;
+        top: 50% !important;
+    }
 }
 
+
 /* ---------- Feature list (editorial, natural) ---------- */
+
 .feature-row {
     display: flex;
     gap: 1rem;
@@ -617,7 +705,9 @@ section .container,
     color: var(--smart-green-dark);
 }
 
+
 /* ---------- Kontak ---------- */
+
 .contact-info li {
     display: flex;
     gap: 0.75rem;
@@ -654,31 +744,73 @@ section .container,
     color: rgba(255, 255, 255, .7);
     text-decoration: none;
 }
+
 .footer-link:hover {
     color: #fff;
     text-decoration: underline;
 }
 
+
 /* ---------- Responsif global ---------- */
-img, svg { max-width: 100%; height: auto; }
+
+img,
+svg {
+    max-width: 100%;
+    height: auto;
+}
 
 @media (max-width: 575.98px) {
-    .landing-navbar { height: auto; padding-top: 8px; padding-bottom: 8px; }
-    .section-title { font-size: 1.6rem; }
-    .container { padding-left: 16px; padding-right: 16px; }
-    .contact-card { padding: 1.25rem; }
-    section { padding: 48px 0; }
-    .hero { padding-top: calc(var(--smart-navbar-h) + 32px); }
-    .hero-illustration { min-height: 260px; }
-    .hero-illustration .bi { font-size: 5rem; }
-    .hero-illustration .chip-1 { left: 6px; }
-    .hero-illustration .chip-2 { right: 6px; }
-    .step-card { padding: 1.25rem !important; }
-    .impact-card, .testimonial-card { padding: 1.25rem; }
-    .feature-row { flex-direction: column; gap: .5rem; }
+    .landing-navbar {
+        height: auto;
+        padding-top: 8px;
+        padding-bottom: 8px;
+    }
+    .section-title {
+        font-size: 1.6rem;
+    }
+    .container {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+    .contact-card {
+        padding: 1.25rem;
+    }
+    section {
+        padding: 48px 0;
+    }
+    .hero {
+        padding-top: calc(var(--smart-navbar-h) + 32px);
+    }
+    .hero-illustration {
+        min-height: 260px;
+    }
+    .hero-illustration .bi {
+        font-size: 5rem;
+    }
+    .hero-illustration .chip-1 {
+        left: 6px;
+    }
+    .hero-illustration .chip-2 {
+        right: 6px;
+    }
+    .step-card {
+        padding: 1.25rem !important;
+    }
+    .impact-card,
+    .testimonial-card {
+        padding: 1.25rem;
+    }
+    .feature-row {
+        flex-direction: column;
+        gap: .5rem;
+    }
 }
 
 @media (max-width: 991.98px) {
-    .section-title { font-size: 1.9rem; }
-    .hero-illustration .bi { font-size: 6rem; }
+    .section-title {
+        font-size: 1.9rem;
+    }
+    .hero-illustration .bi {
+        font-size: 6rem;
+    }
 }
