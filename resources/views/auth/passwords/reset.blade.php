@@ -43,7 +43,7 @@
             </div>
         </div>
 
-        <button type="submit" class="btn btn-primary w-100">
+        <button type="submit" class="btn btn-cta-primary w-100">
             <i class="bi bi-arrow-repeat me-1"></i> {{ __('Reset Password') }}
         </button>
     </form>

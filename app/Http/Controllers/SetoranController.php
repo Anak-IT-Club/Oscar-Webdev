@@ -43,6 +43,7 @@ class SetoranController extends Controller
             'setorans' => $setorans,
             'jenisList' => Sampah::JENIS_SAMPAH,
             'totalPoinHariIni' => Setoran::whereDate('created_at', today())->sum('poin'),
+            'totalPoinSemua' => Setoran::sum('poin'),
         ]);
     }
 

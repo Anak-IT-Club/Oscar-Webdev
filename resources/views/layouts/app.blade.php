@@ -7,7 +7,7 @@
     <title>@yield('title', 'Smart Site')</title>
     @vite(['resources/js/adminlte.js', 'resources/js/dashboard.js'])
 </head>
-<body class="app sidebar-collapse">
+<body class="app">
     <div class="app-wrapper">
 
         {{-- Navbar --}}

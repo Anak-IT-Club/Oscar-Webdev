@@ -21,7 +21,7 @@
     @endif
 
     <div class="row g-3 mb-3 reveal">
-        <div class="col-sm-6 col-xl-4">
+        <div class="col-6 col-lg-4">
             <div class="dash-card dash-stat">
                 <span class="icon"><i class="bi bi-recycle"></i></span>
                 <div>
@@ -30,12 +30,21 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-6 col-xl-4">
+        <div class="col-6 col-lg-4">
             <div class="dash-card dash-stat">
                 <span class="icon"><i class="bi bi-coin"></i></span>
                 <div>
                     <div class="num">{{ number_format($totalPoinHariIni, 0, ',', '.') }}</div>
                     <div class="label">Poin Hari Ini</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-lg-4">
+            <div class="dash-card dash-stat">
+                <span class="icon"><i class="bi bi-graph-up-arrow"></i></span>
+                <div>
+                    <div class="num">{{ number_format($totalPoinSemua, 0, ',', '.') }}</div>
+                    <div class="label">Total Poin Setoran</div>
                 </div>
             </div>
         </div>
