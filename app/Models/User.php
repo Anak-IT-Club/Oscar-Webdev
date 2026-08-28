@@ -28,6 +28,7 @@ class User extends Authenticatable
         'no_hp',
         'poin',
         'role',
+        'foto',
     ];
 
     /**
@@ -60,5 +61,10 @@ class User extends Authenticatable
     public function isAdmin(): bool
     {
         return $this->role === 'admin';
+    }
+
+    public function tukarPoin()
+    {
+        return $this->hasMany(TukarPoin::class);
     }
 }

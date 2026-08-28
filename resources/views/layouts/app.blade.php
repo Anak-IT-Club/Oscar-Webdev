@@ -19,6 +19,12 @@
                             <i class="bi bi-list"></i>
                         </a>
                     </li>
+                    <li class="nav-item d-flex align-items-center side-brand-li">
+                        <a class="side-brand" href="{{ url('/') }}">
+                            <span class="badge-logo"><i class="bi bi-recycle"></i></span>
+                            <span>Smart Site</span>
+                        </a>
+                    </li>
                 </ul>
 
                 <ul class="navbar-nav ms-auto">
@@ -46,12 +52,13 @@
         {{-- Sidebar --}}
         <aside class="app-sidebar">
             <div class="sidebar-brand">
-                <a href="{{ url('/') }}" class="brand-link">
-                    <i class="bi bi-recycle brand-image me-2"></i>
-                    <span class="brand-text fw-light">Smart Site</span>
-                </a>
+                <div class="brand-link">
+                    <span class="brand-badge"><i class="bi bi-recycle"></i></span>
+                    <span class="brand-text">Smart Site</span>
+                </div>
             </div>
             <div class="sidebar-wrapper">
+                <div class="menu-label">Menu</div>
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column sidebar-menu" data-lte-toggle="treeview" role="menu">
                         <li class="nav-item">
@@ -67,9 +74,48 @@
                                 <p>Users</p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{ route('sampah.index') }}" class="nav-link {{ request()->routeIs('sampah.*') ? 'active' : '' }}">
+                                <i class="nav-icon bi bi-recycle"></i>
+                                <p>Sampah</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('hadiah.index') }}" class="nav-link {{ request()->routeIs('hadiah.*') ? 'active' : '' }}">
+                                <i class="nav-icon bi bi-gift"></i>
+                                <p>Hadiah</p>
+                            </a>
+                        </li>
+                        @else
+                        <li class="nav-item">
+                            <a href="{{ route('redeem.index') }}" class="nav-link {{ request()->routeIs('redeem.*') ? 'active' : '' }}">
+                                <i class="nav-icon bi bi-gift"></i>
+                                <p>Redeem Poin</p>
+                            </a>
+                        </li>
                         @endif
+                        <li class="nav-item">
+                            <a href="{{ route('profile.index') }}" class="nav-link {{ request()->routeIs('profile.*') ? 'active' : '' }}">
+                                <i class="nav-icon bi bi-person-circle"></i>
+                                <p>Profil</p>
+                            </a>
+                        </li>
                     </ul>
                 </nav>
+            </div>
+
+            <div class="side-user">
+                <span class="avatar" id="sideAvatar" data-initial="{{ strtoupper(substr(Auth::user()->nama, 0, 1)) }}">
+                    @if (Auth::user()->foto)
+                        <img src="{{ asset('foto_profil/'.Auth::user()->foto) }}" alt="Foto" class="rounded-circle" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">
+                    @else
+                        {{ strtoupper(substr(Auth::user()->nama, 0, 1)) }}
+                    @endif
+                </span>
+                <div>
+                    <div class="u-name">{{ Auth::user()->nama }}</div>
+                    <div class="u-role">{{ ucfirst(Auth::user()->role) }}</div>
+                </div>
             </div>
         </aside>
 

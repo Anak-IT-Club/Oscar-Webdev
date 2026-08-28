@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Hadiah;
+use App\Models\Sampah;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -40,5 +42,27 @@ class DatabaseSeeder extends Seeder
                 'password' => Hash::make('password'),
             ]
         );
+
+        $daftarSampah = [
+            ['nama_sampah' => 'Sampah Dapur', 'jenis_sampah' => 'Organik', 'poin' => 8],
+            ['nama_sampah' => 'Plastik Kemasan', 'jenis_sampah' => 'Non-Organik', 'poin' => 10],
+            ['nama_sampah' => 'Baterai Bekas', 'jenis_sampah' => 'B3', 'poin' => 20],
+            ['nama_sampah' => 'Pembalut & Pampers', 'jenis_sampah' => 'Residu', 'poin' => 5],
+        ];
+
+        foreach ($daftarSampah as $item) {
+            Sampah::updateOrCreate(['nama_sampah' => $item['nama_sampah']], $item);
+        }
+
+        $daftarHadiah = [
+            ['nama_hadiah' => 'Pulpen', 'poin' => 10],
+            ['nama_hadiah' => 'Buku Tulis', 'poin' => 25],
+            ['nama_hadiah' => 'Tumbler', 'poin' => 50],
+            ['nama_hadiah' => 'Voucher Makan', 'poin' => 100],
+        ];
+
+        foreach ($daftarHadiah as $item) {
+            Hadiah::updateOrCreate(['nama_hadiah' => $item['nama_hadiah']], $item);
+        }
     }
 }

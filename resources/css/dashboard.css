@@ -1,86 +1,320 @@
-:root {
-    --ss-green: #1f7a3d;
-    --ss-green-dark: #155f2c;
-    --ss-green-darker: #0f4821;
-    --ss-accent: #34a853;
+/* ===========================================================
+   Smart Site — tema dashboard (selaras dengan landing page)
+   =========================================================== */
+
+/* ---------- Top navbar ---------- */
+.app-header.navbar {
+    background: #fff !important;
+    border-bottom: 1px solid #e6efe8;
+    box-shadow: 0 6px 20px -16px rgba(21, 95, 44, .45);
+    height: var(--smart-navbar-h, 68px);
+}
+.app-header .nav-link { color: var(--smart-text) !important; }
+.app-header .nav-link:hover { color: var(--smart-green) !important; }
+
+/* brand di kiri (sebelah hamburger) */
+.app-header .side-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 800;
+    font-size: 1.2rem;
+    color: var(--smart-green-dark);
+    text-decoration: none;
+    padding-left: 6px;
+}
+.app-header .side-brand .badge-logo {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, var(--smart-accent), var(--smart-green-dark));
+    color: #fff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.05rem;
 }
 
-/* ============ NAVBAR ============ */
-.app-header.navbar,
-.app-header.navbar.bg-body {
-    background: linear-gradient(90deg, var(--ss-green-dark), var(--ss-green)) !important;
-}
-/* Paksa navbar menempel di tepi kiri (hilangkan reservasi ruang sidebar) */
-.app-header {
-    left: 0 !important;
-    right: 0 !important;
-    margin-left: 0 !important;
-}
-.app-header .navbar-nav .nav-link {
-    color: #fff !important;
-}
-.app-header .navbar-nav .nav-link:hover {
-    color: #d8f0e0 !important;
-}
-
-/* ============ SIDEBAR ============ */
+/* ---------- Sidebar ---------- */
 .app-sidebar {
-    background: linear-gradient(180deg, var(--ss-green-dark), var(--ss-green-darker)) !important;
+    background: linear-gradient(165deg, var(--smart-accent) 0%, var(--smart-green-dark) 52%, var(--smart-green-darker) 100%) !important;
+    width: var(--lte-sidebar-width, 250px);
 }
 .sidebar-brand {
-    border-bottom: 1px solid rgba(255, 255, 255, .12);
+    border-bottom: 1px solid rgba(255, 255, 255, .14);
+    padding: 16px;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    text-align: left !important;
 }
-.sidebar-brand .brand-link,
+.sidebar-brand .brand-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    justify-content: flex-start !important;
+    cursor: default;
+}
+.sidebar-brand .brand-badge {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    flex: none;
+    background: rgba(255, 255, 255, .16);
+    color: #fff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+}
 .sidebar-brand .brand-text {
-    color: #fff !important;
-    background: transparent !important;
-}
-.sidebar-brand .brand-image {
+    font-weight: 800;
+    font-size: 1.15rem;
     color: #fff;
 }
 
+.app-sidebar .nav-sidebar {
+    padding: 8px 12px;
+}
+.app-sidebar .menu-label {
+    color: rgba(255, 255, 255, .6);
+    font-size: .7rem;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    padding: 16px 12px 6px;
+}
 .app-sidebar .nav-sidebar .nav-link {
-    color: rgba(255, 255, 255, .82);
-    border-radius: 10px;
-    margin: 2px 10px;
-    padding-left: 14px;
-}
-.app-sidebar .nav-icon {
     color: rgba(255, 255, 255, .85);
+    border-radius: 12px;
+    padding: 10px 12px;
+    margin: 2px 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
-.app-sidebar .nav-sidebar .nav-link p {
-    color: inherit;
-}
+.app-sidebar .nav-sidebar .nav-link p { margin: 0; color: inherit; }
+.app-sidebar .nav-sidebar .nav-icon { color: rgba(255, 255, 255, .9); font-size: 1.15rem; }
 .app-sidebar .nav-sidebar .nav-link:hover {
     background: rgba(255, 255, 255, .14) !important;
-    color: #fff !important;
-}
-.app-sidebar .nav-sidebar .nav-link.active {
-    background: var(--ss-accent) !important;
-    color: #fff !important;
-    box-shadow: 0 10px 24px -12px rgba(52, 168, 83, .8);
-}
-.app-sidebar .nav-sidebar .nav-link.active .nav-icon {
     color: #fff;
 }
+.app-sidebar .nav-sidebar .nav-link.active {
+    background: #fff !important;
+    color: var(--smart-green-dark) !important;
+    box-shadow: 0 12px 26px -14px rgba(0, 0, 0, .55);
+}
+.app-sidebar .nav-sidebar .nav-link.active .nav-icon { color: var(--smart-green); }
 
-/* ============ SIDEBAR OFF-CANVAS (tersembunyi sampai hamburger) ============ */
-/* Default (sidebar-collapse): kolom sidebar dijadikan 0 -> konten full-width,
-   tidak ada kolom kosong / spasi di kiri hamburger. */
-.app-wrapper {
-    grid-template-columns: 0 1fr !important;
+/* kartu user di bawah sidebar */
+.side-user {
+    margin-top: auto;
+    margin-left: 12px;
+    margin-right: 12px;
+    margin-bottom: 16px;
+    padding: 12px;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, .12);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.side-user .avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    flex: none;
+    background: rgba(255, 255, 255, .22);
+    color: #fff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+}
+.side-user .u-name { font-weight: 700; font-size: .9rem; line-height: 1.15; }
+.side-user .u-role { font-size: .72rem; color: rgba(255, 255, 255, .75); }
+
+/* ---------- Konten ---------- */
+.app-main { background: #f4f8f5; }
+.app-content-wrapper { padding: 22px; }
+
+.dash-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+}
+.dash-title { font-weight: 800; color: var(--smart-green-dark); font-size: 1.55rem; margin: 0; }
+.dash-sub { color: var(--smart-muted); margin: 0; }
+.dash-role {
+    background: var(--smart-green-light);
+    color: var(--smart-green-dark);
+    font-weight: 700;
+    font-size: .8rem;
+    padding: 6px 14px;
+    border-radius: 999px;
+}
+
+/* kartu dashboard */
+.dash-card {
+    border: 1px solid #e6efe8;
+    border-radius: 16px;
+    background: #fff;
+    box-shadow: 0 12px 30px -24px rgba(21, 95, 44, .6);
+    height: 100%;
+}
+.dash-stat { padding: 20px; display: flex; align-items: center; gap: 16px; }
+.dash-stat .icon {
+    width: 54px;
+    height: 54px;
+    border-radius: 14px;
+    flex: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    background: var(--smart-green-light);
+    color: var(--smart-green);
+}
+.dash-stat .num { font-size: 1.9rem; font-weight: 800; color: var(--smart-green-dark); line-height: 1; }
+.dash-stat .label { color: var(--smart-muted); font-size: .85rem; }
+
+.dash-card.green {
+    background: linear-gradient(135deg, var(--smart-green-dark), var(--smart-green-darker));
+    color: #fff;
+    border: none;
+}
+.dash-card.green .num { color: #fff; font-size: 2.2rem; }
+.dash-card.green .label,
+.dash-card.green .dash-sub { color: rgba(255, 255, 255, .82); }
+
+/* tombol selaras landing (didefinisikan global supaya kebaca di dashboard) */
+.btn-cta-primary {
+    background: var(--smart-green);
+    border-color: var(--smart-green);
+    color: #fff;
+    font-weight: 600;
+    border-radius: 999px;
+    padding: .6rem 1.4rem;
+}
+.btn-cta-primary:hover { background: var(--smart-green-dark); border-color: var(--smart-green-dark); color: #fff; }
+.btn-cta-ghost {
+    border-radius: 999px;
+    padding: .6rem 1.4rem;
+    font-weight: 600;
+    color: var(--smart-green-dark);
+    border-color: var(--smart-green);
+}
+.btn-cta-ghost:hover { background: var(--smart-green-light); color: var(--smart-green-dark); }
+
+/* ---------- Sidebar off-canvas (tersembunyi sampai hamburger) ---------- */
+.app-wrapper { grid-template-columns: 0 1fr !important; }
+.app-sidebar {
+    box-shadow: none !important;
+    transition: margin-left .25s ease-in-out !important;
 }
 .sidebar-collapse .app-sidebar {
     margin-left: calc(var(--lte-sidebar-width) * -1) !important;
     visibility: hidden;
+    box-shadow: none !important;
+    transition: none !important;
+}
+body:not(.sidebar-collapse) .app-wrapper { grid-template-columns: auto 1fr !important; }
+body:not(.sidebar-collapse) .app-sidebar { margin-left: 0 !important; visibility: visible; }
+
+/* ---------- Profile avatar + crop upload ---------- */
+.profile-avatar { position: relative; display: inline-block; }
+.profile-avatar .rounded-circle {
+    width: 110px; height: 110px; object-fit: cover;
+    display: inline-flex; align-items: center; justify-content: center;
+    background: var(--smart-green-light); color: var(--smart-green);
+    font-size: 2.4rem; font-weight: 800;
+}
+.avatar-actions {
+    position: absolute; bottom: 4px; left: 50%; transform: translateX(-50%);
+    display: flex; gap: 6px;
+}
+.avatar-edit {
+    width: 34px; height: 34px; border-radius: 50%;
+    background: var(--smart-green); color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; box-shadow: 0 2px 6px rgba(0,0,0,.2);
+    transition: background .15s ease;
+}
+.avatar-edit:hover { background: var(--smart-green-dark); }
+.avatar-del {
+    width: 34px; height: 34px; border-radius: 50%;
+    background: #e53935; color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; box-shadow: 0 2px 6px rgba(0,0,0,.2);
+    transition: background .15s ease;
+}
+.avatar-del:hover { background: #c62828; }
+.side-user .avatar img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+
+/* ---------- Responsif (mobile / tablet) ---------- */
+body { overflow-x: hidden; }
+img, svg { max-width: 100%; height: auto; }
+
+.side-user .u-name { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* kartu form (create/edit) konsisten di admin */
+.contact-card {
+    background: #fff;
+    color: var(--smart-text);
+    border: 1px solid #e6efe8;
+    border-radius: 16px;
+    box-shadow: 0 12px 30px -24px rgba(21, 95, 44, .5);
 }
 
-/* Saat kebuka: kembalikan grid 2 kolom normal, sidebar menempati kolom kiri. */
-body:not(.sidebar-collapse) .app-wrapper {
-    grid-template-columns: auto 1fr !important;
-}
-body:not(.sidebar-collapse) .app-sidebar {
-    margin-left: 0 !important;
-    visibility: visible;
+/* tabel info profil responsif (stack di HP) */
+.profile-info th, .profile-info td { vertical-align: top; }
+.profile-info td { word-break: break-word; }
+
+@media (max-width: 991.98px) {
+    .app-wrapper,
+    body.sidebar-collapse .app-wrapper,
+    body:not(.sidebar-collapse) .app-wrapper { grid-template-columns: 1fr !important; }
+    .app-main { padding-left: 0 !important; }
+    .app-sidebar {
+        position: fixed;
+        top: var(--smart-navbar-h, 68px);
+        bottom: 0;
+        left: 0;
+        width: var(--lte-sidebar-width, 250px);
+        z-index: 1040;
+        overflow-y: auto;
+        transform: translateX(-100%);
+        visibility: hidden;
+        transition: transform .25s ease-in-out !important;
+        box-shadow: none !important;
+    }
+    body:not(.sidebar-collapse) .app-sidebar {
+        transform: translateX(0);
+        visibility: visible;
+    }
+    body.sidebar-collapse .app-sidebar { margin-left: 0 !important; }
+    .app-content-wrapper { padding: 16px; }
+
+    /* navbar: hamburger kiri, logo + Smart Site kanan (mobile) */
+    .app-header .navbar .container-fluid > .navbar-nav:first-child { flex: 1 1 auto; }
+    .app-header .side-brand-li { margin-left: auto; }
 }
 
+@media (max-width: 575.98px) {
+    .app-content-wrapper { padding: 12px; }
+    .dash-title { font-size: 1.3rem; }
+    .dash-stat { padding: 16px; gap: 12px; }
+    .dash-stat .icon { width: 46px; height: 46px; font-size: 1.3rem; }
+    .dash-stat .num { font-size: 1.5rem; }
+    .profile-avatar .rounded-circle { width: 92px; height: 92px; font-size: 2rem; }
+    .dash-head { gap: 8px; }
+    .contact-card { padding: 16px !important; }
+    .profile-info tr { display: block; padding: .6rem 0; border-bottom: 1px solid #eef3ee; }
+    .profile-info th, .profile-info td { display: block; width: auto !important; padding: .3rem 0; }
+    .profile-info th { font-weight: 700; color: var(--smart-muted); font-size: .78rem; text-transform: uppercase; letter-spacing: .04em; }
+}

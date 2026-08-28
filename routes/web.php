@@ -3,14 +3,18 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\SampahController;
+use App\Http\Controllers\HadiahController;
+use App\Http\Controllers\RedeemController;
+use App\Http\Controllers\ProfileController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('pages.home');
 });
 
-Route::view('/kontak', 'kontak')->name('kontak');
-Route::view('/tentang', 'tentang')->name('tentang');
-Route::view('/cara-kerja', 'cara-kerja')->name('cara-kerja');
+Route::view('/kontak', 'pages.kontak')->name('kontak');
+Route::view('/tentang', 'pages.tentang')->name('tentang');
+Route::view('/cara-kerja', 'pages.cara-kerja')->name('cara-kerja');
 
 Auth::routes();
 
@@ -18,5 +22,14 @@ Route::get('/home', [HomeController::class, 'index'])
     ->name('home');
 
 Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
+    Route::post('/profile/photo', [ProfileController::class, 'photo'])->name('profile.photo');
+    Route::post('/profile/photo/delete', [ProfileController::class, 'deletePhoto'])->name('profile.photo.delete');
+
     Route::resource('users', UserController::class)->except(['show']);
+    Route::resource('sampah', SampahController::class)->except(['show']);
+    Route::resource('hadiah', HadiahController::class)->except(['show']);
+
+    Route::get('/redeem', [RedeemController::class, 'index'])->name('redeem.index');
+    Route::post('/redeem', [RedeemController::class, 'store'])->name('redeem.store');
 });
