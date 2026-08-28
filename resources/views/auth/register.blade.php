@@ -62,6 +62,20 @@
                 <select id="kelas" name="kelas"
                         class="form-select @error('kelas') is-invalid @enderror" required>
                     <option value="" disabled {{ old('kelas') ? '' : 'selected' }}>Pilih jurusan dulu</option>
+                    @php
+                        $kelasOpts = [
+                            'TKJ'  => ['10 TKJ 1', '10 TKJ 2', '11 TKJ 1', '11 TKJ 2', '12 TKJ'],
+                            'MPLB' => ['10 MPLB', '11 MPLB', '12 MPLB'],
+                            'AKL'  => ['10 AKL', '11 AKL', '12 AKL'],
+                        ];
+                    @endphp
+                    @foreach ($kelasOpts as $j => $list)
+                        <optgroup label="{{ $j }}">
+                            @foreach ($list as $k)
+                                <option value="{{ $k }}" data-jurusan="{{ $j }}" {{ old('kelas') == $k ? 'selected' : '' }}>{{ $k }}</option>
+                            @endforeach
+                        </optgroup>
+                    @endforeach
                 </select>
                 @error('kelas')
                     <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
@@ -102,32 +116,28 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            var kelasByJurusan = {
-                'TKJ': ['10 TKJ 1', '10 TKJ 2', '11 TKJ 1', '11 TKJ 2', '12 TKJ'],
-                'MPLB': ['10 MPLB', '11 MPLB', '12 MPLB'],
-                'AKL': ['10 AKL', '11 AKL', '12 AKL']
-            };
             var jurusan = document.getElementById('jurusan');
             var kelas = document.getElementById('kelas');
             var oldKelas = @json(old('kelas'));
 
-            function fillKelas(j) {
-                kelas.innerHTML = '';
-                var ph = document.createElement('option');
-                ph.value = ''; ph.textContent = 'Pilih kelas'; ph.disabled = true;
-                kelas.appendChild(ph);
-                if (!j || !kelasByJurusan[j]) { kelas.value = ''; return; }
-                kelasByJurusan[j].forEach(function (k) {
-                    var o = document.createElement('option');
-                    o.value = k; o.textContent = k;
-                    if (k === oldKelas) o.selected = true;
-                    kelas.appendChild(o);
-                });
-                kelas.value = (oldKelas && kelasByJurusan[j].indexOf(oldKelas) !== -1) ? oldKelas : '';
+            if (oldKelas) {
+                var j = oldKelas.indexOf('TKJ') > -1 ? 'TKJ'
+                      : (oldKelas.indexOf('MPLB') > -1 ? 'MPLB'
+                      : (oldKelas.indexOf('AKL') > -1 ? 'AKL' : null));
+                if (j) jurusan.value = j;
             }
 
-            jurusan.addEventListener('change', function () { fillKelas(this.value); });
-            fillKelas(jurusan.value);
+            function filterKelas(j) {
+                kelas.querySelectorAll('option').forEach(function (o) {
+                    if (o.value === '') { o.hidden = false; return; }
+                    o.hidden = !!j && o.dataset.jurusan !== j;
+                });
+                var sel = oldKelas ? kelas.querySelector('option[value="' + oldKelas + '"]') : null;
+                kelas.value = (sel && !sel.hidden) ? oldKelas : '';
+            }
+
+            jurusan.addEventListener('change', function () { filterKelas(this.value); });
+            filterKelas(jurusan.value);
         });
     </script>
 @endsection

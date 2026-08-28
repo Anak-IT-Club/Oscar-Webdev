@@ -12,12 +12,24 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('nisn')->nullable()->after('name');
-            $table->string('nama')->nullable()->after('nisn');
-            $table->string('kelas')->nullable()->after('nama');
-            $table->string('jurusan')->nullable()->after('kelas');
-            $table->string('no_hp')->nullable()->after('jurusan');
-            $table->string('role')->default('siswa')->after('no_hp');
+            if (! Schema::hasColumn('users', 'nisn')) {
+                $table->string('nisn')->nullable();
+            }
+            if (! Schema::hasColumn('users', 'nama')) {
+                $table->string('nama')->nullable();
+            }
+            if (! Schema::hasColumn('users', 'kelas')) {
+                $table->string('kelas')->nullable();
+            }
+            if (! Schema::hasColumn('users', 'jurusan')) {
+                $table->string('jurusan')->nullable();
+            }
+            if (! Schema::hasColumn('users', 'no_hp')) {
+                $table->string('no_hp')->nullable();
+            }
+            if (! Schema::hasColumn('users', 'role')) {
+                $table->string('role')->default('siswa');
+            }
         });
     }
 

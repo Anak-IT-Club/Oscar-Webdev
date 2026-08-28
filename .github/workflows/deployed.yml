@@ -27,6 +27,15 @@ jobs:
           port: ${{ secrets.ITCLUB_PORT }}
           script: cd server/oscar.itclub.id && php -r "file_exists('.env') || copy('.env.example', '.env');"
 
+      - name: 🎨 Build Frontend Assets
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.ITCLUB_HOST }}
+          username: ${{ secrets.ITCLUB_USER }}
+          password: ${{ secrets.ITCLUB_PASS }}
+          port: ${{ secrets.ITCLUB_PORT }}
+          script: cd server/oscar.itclub.id && npm ci --include=dev && npm run build
+
       - name: 🔱 Chmod Storage
         uses: appleboy/ssh-action@master
         with:
@@ -44,6 +53,15 @@ jobs:
           password: ${{ secrets.ITCLUB_PASS }}
           port: ${{ secrets.ITCLUB_PORT }}
           script: cd server/oscar.itclub.id && php artisan key:generate
+
+      - name: 🗄️ Artisan Migrate
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.ITCLUB_HOST }}
+          username: ${{ secrets.ITCLUB_USER }}
+          password: ${{ secrets.ITCLUB_PASS }}
+          port: ${{ secrets.ITCLUB_PORT }}
+          script: cd server/oscar.itclub.id && php artisan migrate --force
 
       - name: ♻️ Artisan Optimize
         uses: appleboy/ssh-action@master
