@@ -22,7 +22,11 @@
                     <li><a href="{{ route('tentang') }}">Tentang</a></li>
                     <li><a href="{{ route('cara-kerja') }}">Cara Kerja</a></li>
                     <li><a href="{{ route('kontak') }}">Kontak</a></li>
-                    <li><a href="{{ route('login') }}">Login</a></li>
+                    @auth
+                        <li><a href="{{ route('home') }}">Dashboard</a></li>
+                    @else
+                        <li><a href="{{ route('login') }}">Login</a></li>
+                    @endauth
                 </ul>
             </div>
 

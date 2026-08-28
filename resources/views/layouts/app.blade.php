@@ -20,7 +20,7 @@
                         </a>
                     </li>
                     <li class="nav-item d-flex align-items-center side-brand-li">
-                        <a class="side-brand" href="{{ url('/') }}">
+                        <a class="side-brand" href="{{ route('home') }}">
                             <span class="badge-logo"><i class="bi bi-recycle"></i></span>
                             <span>Smart Site</span>
                         </a>
@@ -52,10 +52,10 @@
         {{-- Sidebar --}}
         <aside class="app-sidebar">
             <div class="sidebar-brand">
-                <div class="brand-link">
+                <a class="brand-link" href="{{ route('home') }}">
                     <span class="brand-badge"><i class="bi bi-recycle"></i></span>
                     <span class="brand-text">Smart Site</span>
-                </div>
+                </a>
             </div>
             <div class="sidebar-wrapper">
                 <div class="menu-label">Menu</div>

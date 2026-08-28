@@ -16,7 +16,7 @@ class ProfileController extends Controller
     public function photo(Request $request)
     {
         $request->validate([
-            'foto' => ['required', 'string', 'regex:/^data:image\/(jpeg|jpg|png|gif|webp);base64,/'],
+            'foto' => ['required', 'image', 'mimes:jpeg,jpg,png,gif,webp', 'max:2048'],
         ]);
 
         $user = auth()->user();
@@ -26,30 +26,15 @@ class ProfileController extends Controller
             mkdir($path, 0755, true);
         }
 
-        $payload = $request->input('foto');
-        $segments = explode(';base64,', $payload, 2);
-        $meta = $segments[0];
-        $binary = base64_decode($segments[1], true);
-
-        if ($binary === false) {
-            return response()->json(['ok' => false, 'message' => 'Data foto tidak valid.'], 422);
-        }
-
-        $ext = 'jpg';
-        if (str_contains($meta, 'png')) {
-            $ext = 'png';
-        } elseif (str_contains($meta, 'webp')) {
-            $ext = 'webp';
-        } elseif (str_contains($meta, 'gif')) {
-            $ext = 'gif';
-        }
-
-        $filename = 'user-'.$user->id.'-'.time().'.'.$ext;
-        file_put_contents($path.'/'.$filename, $binary);
-
+        // hapus foto lama
         if ($user->foto && file_exists($path.'/'.$user->foto)) {
             @unlink($path.'/'.$user->foto);
         }
+
+        $file = $request->file('foto');
+        $ext = $file->getClientOriginalExtension() ?: 'jpg';
+        $filename = 'user-'.$user->id.'-'.time().'.'.$ext;
+        $file->move($path, $filename);
 
         $user->update(['foto' => $filename]);
 

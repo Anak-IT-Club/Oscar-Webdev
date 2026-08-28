@@ -4,6 +4,11 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 import '../css/landing.css';
 
 import * as bootstrap from 'bootstrap';
+import Cropper from 'cropperjs';
+import 'cropperjs/dist/cropper.min.css';
+
+window.bootstrap = bootstrap;
+window.Cropper = Cropper;
 
 /* Reveal-on-scroll for .reveal elements (respects reduced-motion) */
 document.addEventListener('DOMContentLoaded', function () {

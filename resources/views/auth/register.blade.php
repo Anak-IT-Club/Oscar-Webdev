@@ -39,6 +39,37 @@
         </div>
 
         <div class="mb-3">
+            <label for="jurusan" class="form-label">Jurusan</label>
+            <div class="input-group">
+                <span class="input-group-text"><i class="bi bi-mortarboard"></i></span>
+                <select id="jurusan" name="jurusan"
+                        class="form-select @error('jurusan') is-invalid @enderror" required>
+                    <option value="" disabled {{ old('jurusan') ? '' : 'selected' }}>Pilih jurusan</option>
+                    <option value="MPLB" {{ old('jurusan') == 'MPLB' ? 'selected' : '' }}>MPLB</option>
+                    <option value="AKL" {{ old('jurusan') == 'AKL' ? 'selected' : '' }}>AKL</option>
+                    <option value="TKJ" {{ old('jurusan') == 'TKJ' ? 'selected' : '' }}>TKJ</option>
+                </select>
+                @error('jurusan')
+                    <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+                @enderror
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="kelas" class="form-label">Kelas</label>
+            <div class="input-group">
+                <span class="input-group-text"><i class="bi bi-building"></i></span>
+                <select id="kelas" name="kelas"
+                        class="form-select @error('kelas') is-invalid @enderror" required>
+                    <option value="" disabled {{ old('kelas') ? '' : 'selected' }}>Pilih jurusan dulu</option>
+                </select>
+                @error('kelas')
+                    <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+                @enderror
+            </div>
+        </div>
+
+        <div class="mb-3">
             <label for="password" class="form-label">{{ __('Password') }}</label>
             <div class="input-group">
                 <span class="input-group-text"><i class="bi bi-lock"></i></span>
@@ -68,4 +99,35 @@
             <a href="{{ route('login') }}" class="auth-link">{{ __('Sudah punya akun? Login') }}</a>
         </div>
     </form>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var kelasByJurusan = {
+                'TKJ': ['10 TKJ 1', '10 TKJ 2', '11 TKJ 1', '11 TKJ 2', '12 TKJ'],
+                'MPLB': ['10 MPLB', '11 MPLB', '12 MPLB'],
+                'AKL': ['10 AKL', '11 AKL', '12 AKL']
+            };
+            var jurusan = document.getElementById('jurusan');
+            var kelas = document.getElementById('kelas');
+            var oldKelas = @json(old('kelas'));
+
+            function fillKelas(j) {
+                kelas.innerHTML = '';
+                var ph = document.createElement('option');
+                ph.value = ''; ph.textContent = 'Pilih kelas'; ph.disabled = true;
+                kelas.appendChild(ph);
+                if (!j || !kelasByJurusan[j]) { kelas.value = ''; return; }
+                kelasByJurusan[j].forEach(function (k) {
+                    var o = document.createElement('option');
+                    o.value = k; o.textContent = k;
+                    if (k === oldKelas) o.selected = true;
+                    kelas.appendChild(o);
+                });
+                kelas.value = (oldKelas && kelasByJurusan[j].indexOf(oldKelas) !== -1) ? oldKelas : '';
+            }
+
+            jurusan.addEventListener('change', function () { fillKelas(this.value); });
+            fillKelas(jurusan.value);
+        });
+    </script>
 @endsection

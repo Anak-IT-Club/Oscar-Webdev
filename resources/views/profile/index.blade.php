@@ -71,6 +71,27 @@
         </div>
     </div>
 
+    <!-- Modal Crop Foto -->
+    <div class="modal fade" id="cropModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Crop Foto Profil</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
+                </div>
+                <div class="modal-body">
+                    <div style="max-height:60vh;overflow:hidden;">
+                        <img id="cropImage" class="w-100">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="button" class="btn btn-success" id="cropSave">Pasang</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             var input = document.getElementById('fotoInput');
@@ -88,16 +109,11 @@
                     ni.className = 'rounded-circle';
                     wrap.replaceChild(ni, old);
                 }
-                var side = document.getElementById('sideAvatar');
-                if (side) {
-                    side.innerHTML = '<img src="' + url + '" alt="Foto" class="rounded-circle" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">';
-                }
                 if (delBtn) { delBtn.classList.remove('d-none'); }
             }
 
             function setDefaultAvatar() {
-                var side = document.getElementById('sideAvatar');
-                var initial = side ? side.getAttribute('data-initial') : '';
+                var initial = '{{ strtoupper(substr($user->nama, 0, 1)) }}';
                 var wrap = document.getElementById('avatarWrap');
                 var old = document.getElementById('avatarImg');
                 if (old) {
@@ -107,66 +123,88 @@
                     div.textContent = initial;
                     wrap.replaceChild(div, old);
                 }
-                if (side) { side.textContent = initial; }
                 if (delBtn) { delBtn.classList.add('d-none'); }
             }
+
+            // Crop modal
+            var cropModalEl = document.getElementById('cropModal');
+            var cropModal = new bootstrap.Modal(cropModalEl);
+            var cropper = null;
+            var pendingFile = null;
 
             if (input) {
                 input.addEventListener('change', function () {
                     var file = this.files[0];
                     if (!file) return;
 
+                    if (!file.type.startsWith('image/')) {
+                        alert('Pilih file gambar (jpg/png).');
+                        this.value = '';
+                        return;
+                    }
+
+                    pendingFile = file;
                     var reader = new FileReader();
                     reader.onload = function (e) {
-                        var img = new Image();
-                        img.onerror = function () { alert('Gagal memuat gambar.'); };
-                        img.onload = function () {
-                            var size = Math.min(img.width, img.height);
-                            var sx = (img.width - size) / 2;
-                            var sy = (img.height - size) / 2;
-                            var canvas = document.createElement('canvas');
-                            canvas.width = 128;
-                            canvas.height = 128;
-                            var ctx = canvas.getContext('2d');
-                            ctx.drawImage(img, sx, sy, size, size, 0, 0, 256, 256);
-
-                            var mime = (file.type && file.type.indexOf('png') !== -1) ? 'image/png' : 'image/jpeg';
-                            var dataUrl = canvas.toDataURL(mime, 0.9);
-
-                            var fd = new FormData();
-                            fd.append('_token', '{{ csrf_token() }}');
-                            fd.append('foto', dataUrl);
-
-                            fetch('{{ route('profile.photo') }}', {
-                                method: 'POST',
-                                headers: { 'Accept': 'application/json', 'X-Requested-With': 'XMLHttpRequest' },
-                                body: fd
-                            })
-                            .then(function (r) {
-                                return r.json().then(function (data) { return { status: r.status, data: data }; });
-                            })
-                            .then(function (res) {
-                                if (res.status === 200 && res.data.ok) {
-                                    setAvatar(res.data.url + '?t=' + Date.now());
-                                } else {
-                                    var msg = 'Gagal mengunggah foto.';
-                                    if (res.data && res.data.errors && res.data.errors.foto) {
-                                        msg = res.data.errors.foto[0];
-                                    } else if (res.data && res.data.message) {
-                                        msg = res.data.message;
-                                    }
-                                    alert(msg);
-                                }
-                            })
-                            .catch(function () { alert('Terjadi kesalahan saat mengunggah foto.'); });
-                        };
-                        img.src = e.target.result;
+                        document.getElementById('cropImage').src = e.target.result;
+                        cropModal.show();
                     };
                     reader.readAsDataURL(file);
-
                     this.value = '';
                 });
             }
+
+            cropModalEl.addEventListener('shown.bs.modal', function () {
+                if (cropper) { cropper.destroy(); }
+                cropper = new Cropper(document.getElementById('cropImage'), {
+                    aspectRatio: 1,
+                    viewMode: 1,
+                    autoCropArea: 1,
+                    background: false,
+                    responsive: true
+                });
+            });
+
+            cropModalEl.addEventListener('hidden.bs.modal', function () {
+                if (cropper) { cropper.destroy(); cropper = null; }
+            });
+
+            document.getElementById('cropSave').addEventListener('click', function () {
+                if (!cropper) return;
+                var canvas = cropper.getCroppedCanvas({ width: 320, height: 320 });
+                if (!canvas) return;
+
+                canvas.toBlob(function (blob) {
+                    var fd = new FormData();
+                    fd.append('_token', '{{ csrf_token() }}');
+                    fd.append('foto', blob, 'profile.png');
+
+                    fetch('{{ route('profile.photo') }}', {
+                        method: 'POST',
+                        headers: { 'Accept': 'application/json', 'X-Requested-With': 'XMLHttpRequest' },
+                        body: fd
+                    })
+                    .then(function (r) {
+                        return r.json().then(function (data) { return { status: r.status, data: data }; });
+                    })
+                    .then(function (res) {
+                        if (res.status === 200 && res.data.ok) {
+                            setAvatar(res.data.url + '?t=' + Date.now());
+                        } else {
+                            var msg = 'Gagal mengunggah foto.';
+                            if (res.data && res.data.errors && res.data.errors.foto) {
+                                msg = res.data.errors.foto[0];
+                            } else if (res.data && res.data.message) {
+                                msg = res.data.message;
+                            }
+                            alert(msg);
+                        }
+                    })
+                    .catch(function () { alert('Terjadi kesalahan saat mengunggah foto.'); });
+
+                    cropModal.hide();
+                }, 'image/png');
+            });
 
             if (delBtn) {
                 delBtn.addEventListener('click', function () {

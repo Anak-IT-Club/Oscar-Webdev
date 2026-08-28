@@ -51,6 +51,8 @@ class RegisterController extends Controller
             'nama' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'jurusan' => ['required', 'string', 'in:MPLB,AKL,TKJ'],
+            'kelas' => ['required', 'string', 'in:10 TKJ 1,10 TKJ 2,10 MPLB,10 AKL,11 MPLB,11 AKL,11 TKJ 1,11 TKJ 2,12 TKJ,12 MPLB,12 AKL'],
         ]);
     }
 
@@ -62,10 +64,13 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         return User::create([
+            'name' => $data['nama'],
             'nama' => $data['nama'],
             'email' => $data['email'],
             'role' => 'siswa',
             'poin' => 0,
+            'jurusan' => $data['jurusan'],
+            'kelas' => $data['kelas'],
             'password' => Hash::make($data['password']),
         ]);
     }

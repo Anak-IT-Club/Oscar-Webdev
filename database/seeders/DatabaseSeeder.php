@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
         User::updateOrCreate(
             ['email' => 'admin@smart.site'],
             [
+                'name' => 'Administrator',
                 'nisn' => 'ADM001',
                 'nama' => 'Administrator',
                 'kelas' => '-',
@@ -32,6 +33,7 @@ class DatabaseSeeder extends Seeder
         User::updateOrCreate(
             ['email' => 'siswa@smart.site'],
             [
+                'name' => 'Siswa Contoh',
                 'nisn' => 'SIS001',
                 'nama' => 'Siswa Contoh',
                 'kelas' => 'XII RPL',
