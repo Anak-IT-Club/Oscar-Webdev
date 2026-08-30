@@ -7,7 +7,7 @@
                     Smart Site
                 </a>
                 <p class="mb-0" style="color:rgba(255,255,255,.7)">
-                    Tong sampah pintar berbasis IoT &amp; AI untuk menciptakan sekolah yang lebih peduli lingkungan.
+                     Tong sampah pintar berbasis IoT &amp; AI untuk menciptakan sekolah yang lebih peduli lingkungan.
                 </p>
                 <p class="mt-2 mb-0">
                     <a href="https://smk.malahayatiislamicschool.sch.id/" target="_blank" rel="noopener noreferrer" class="footer-link">
