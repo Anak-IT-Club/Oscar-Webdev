@@ -21,10 +21,13 @@
                     <div class="contact-card h-100">
                         <h5 class="fw-bold mb-3" style="color:var(--smart-green-dark)">Informasi Kontak</h5>
                         <p style="color:var(--smart-muted)">
-                            Smart Site adalah tong sampah pintar berbasis IoT &amp; AI yang dikembangkan oleh
-                            siswa <strong>SMK Islam Malahayati</strong>. Kalau kamu punya pertanyaan, ingin
-                            melihat demo, atau memasang Smart Site di sekolahmu, silakan hubungi kami lewat
-                            informasi di bawah atau kirim pesan langsung.
+                          Smart Site adalah aplikasi web yang dikembangkan oleh siswa SMK Islam Malahayati
+                            sebagai penghubung antara tong sampah pintar SMARTBIN dengan pengguna. SMARTBIN
+                            membaca kartu RFID dan memindai sampah via kamera berbasis AI untuk mengenali jenis
+                            sampahnya, lalu seluruh datanya dikirim ke Smart Site agar poin pengguna langsung
+                            tercatat dan dapat dipantau secara real-time di website ini. Kalau kamu punya
+                            pertanyaan, ingin melihat demo, atau memasang SMARTBIN di sekolahmu, silakan hubungi
+                            kami lewat informasi di bawah atau kirim pesan langsung.
                         </p>
                         <ul class="list-unstyled mb-0 contact-info mt-3" style="color:var(--smart-muted)">
                             <li>
