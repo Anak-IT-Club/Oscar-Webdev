@@ -21,7 +21,7 @@
                     <div class="contact-card h-100">
                         <h5 class="fw-bold mb-3" style="color:var(--smart-green-dark)">Informasi Kontak</h5>
                         <p style="color:var(--smart-muted)">
-                            Smart Site adalah tong sampah pintar berbasis IoT &amp; AI yang dikembangkan oleh
+                                                        Smart Site adalah tong sampah pintar berbasis IoT &amp; AI yang dikembangkan oleh
                             siswa <strong>SMK Islam Malahayati</strong>. Kalau kamu punya pertanyaan, ingin
                             melihat demo, atau memasang Smart Site di sekolahmu, silakan hubungi kami lewat
                             informasi di bawah atau kirim pesan langsung.
