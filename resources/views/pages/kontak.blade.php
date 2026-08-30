@@ -54,7 +54,7 @@
                                 <span class="ci-icon"><i class="bi bi-telephone"></i></span>
                                 <div>
                                     <div class="fw-semibold" style="color:var(--smart-green-dark)">WhatsApp</div>
-                                    <div class="small">0812-3456-7890</div>
+                                    <div class="small">0823-1825-8585</div>
                                 </div>
                             </li>
                             <li>
