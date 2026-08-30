@@ -1,5 +1,4 @@
 @extends('layouts.landing')
-
 @section('content')
     @include('partials.navbar')
 
@@ -21,12 +20,12 @@
                     <div class="contact-card h-100">
                         <h5 class="fw-bold mb-3" style="color:var(--smart-green-dark)">Informasi Kontak</h5>
                         <p style="color:var(--smart-muted)">
-                          Smart Site adalah aplikasi web yang dikembangkan oleh siswa SMK Islam Malahayati
-                            sebagai penghubung antara tong sampah pintar SMARTBIN dengan pengguna. SMARTBIN
+                            <strong>Smart Site</strong> adalah aplikasi web yang dikembangkan oleh siswa <strong>SMK Islam Malahayati</strong>
+                            sebagai penghubung antara tong sampah pintar <strong>SmartBin</strong> dengan pengguna. <strong>SmartBin</strong>
                             membaca kartu RFID dan memindai sampah via kamera berbasis AI untuk mengenali jenis
-                            sampahnya, lalu seluruh datanya dikirim ke Smart Site agar poin pengguna langsung
+                            sampahnya, lalu seluruh datanya dikirim ke <strong>Smart Site</strong> agar poin pengguna langsung
                             tercatat dan dapat dipantau secara real-time di website ini. Kalau kamu punya
-                            pertanyaan, ingin melihat demo, atau memasang SMARTBIN di sekolahmu, silakan hubungi
+                            pertanyaan, ingin melihat demo, atau memasang <strong>SmartBin</strong> di sekolahmu, silakan hubungi
                             kami lewat informasi di bawah atau kirim pesan langsung.
                         </p>
                         <ul class="list-unstyled mb-0 contact-info mt-3" style="color:var(--smart-muted)">
