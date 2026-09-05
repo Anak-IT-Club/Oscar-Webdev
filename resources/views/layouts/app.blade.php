@@ -92,11 +92,23 @@
                                 <p>Hadiah</p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{ route('pencairan.index') }}" class="nav-link {{ request()->routeIs('pencairan.*') ? 'active' : '' }}">
+                                <i class="nav-icon bi bi-cash-coin"></i>
+                                <p>Pencairan</p>
+                            </a>
+                        </li>
                         @else
                         <li class="nav-item">
                             <a href="{{ route('scanner.index') }}" class="nav-link {{ request()->routeIs('scanner.*') ? 'active' : '' }}">
                                 <i class="nav-icon bi bi-camera-fill"></i>
                                 <p>Scan Sampah (AI)</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('tabungan.index') }}" class="nav-link {{ request()->routeIs('tabungan.*') ? 'active' : '' }}">
+                                <i class="nav-icon bi bi-piggy-bank"></i>
+                                <p>Tabungan</p>
                             </a>
                         </li>
                         <li class="nav-item">
