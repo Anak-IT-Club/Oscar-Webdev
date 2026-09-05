@@ -106,32 +106,60 @@
             var claimBtn = document.getElementById('claimBtn');
             var noOpsi = document.getElementById('noOpsi');
             var token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-            var currentFile = null;
+            var currentBlob = null;
 
             function show(el) { el.classList.remove('d-none'); }
             function hide(el) { el.classList.add('d-none'); }
 
+            // Kecilkan foto di browser agar tidak melebihi batas upload server (foto HP bisa >5MB).
+            function resizeImage(file, maxDim, quality) {
+                return new Promise(function (resolve) {
+                    var url = URL.createObjectURL(file);
+                    var img = new Image();
+                    img.onload = function () {
+                        URL.revokeObjectURL(url);
+                        var w = img.width, h = img.height;
+                        if (Math.max(w, h) > maxDim) {
+                            if (w >= h) { h = Math.round(h * maxDim / w); w = maxDim; }
+                            else { w = Math.round(w * maxDim / h); h = maxDim; }
+                        }
+                        try {
+                            var canvas = document.createElement('canvas');
+                            canvas.width = w; canvas.height = h;
+                            canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+                            canvas.toBlob(function (blob) { resolve(blob || file); }, 'image/jpeg', quality);
+                        } catch (e) { resolve(file); }
+                    };
+                    img.onerror = function () { URL.revokeObjectURL(url); resolve(file); };
+                    img.src = url;
+                });
+            }
+
             input.addEventListener('change', function () {
                 var file = this.files[0];
                 if (!file) return;
-                currentFile = file;
-                var reader = new FileReader();
-                reader.onload = function (e) {
-                    preview.src = e.target.result;
-                    preview.classList.remove('d-none');
-                    hide(placeholder);
-                };
-                reader.readAsDataURL(file);
-                analyzeBtn.disabled = false;
+                if (!file.type.match(/^image\//)) { alert('Pilih file gambar (JPG/PNG).'); this.value = ''; return; }
+                analyzeBtn.disabled = true;
+                resizeImage(file, 1280, 0.85).then(function (blob) {
+                    currentBlob = blob;
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        preview.src = e.target.result;
+                        preview.classList.remove('d-none');
+                        hide(placeholder);
+                    };
+                    reader.readAsDataURL(blob);
+                    analyzeBtn.disabled = false;
+                });
             });
 
             analyzeBtn.addEventListener('click', function () {
-                if (!currentFile) return;
+                if (!currentBlob) return;
                 hide(idle); hide(result); hide(errorBox); show(loading);
                 analyzeBtn.disabled = true;
 
                 var fd = new FormData();
-                fd.append('foto', currentFile);
+                fd.append('foto', currentBlob, 'scan.jpg');
                 fd.append('_token', token);
 
                 fetch('{{ route('scanner.analyze') }}', {
