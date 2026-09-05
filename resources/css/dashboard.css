@@ -194,6 +194,9 @@
 
 .app-main {
     background: #f4f8f5;
+    /* cegah grid item melebar melebihi layar karena konten (fix geser horizontal di HP) */
+    min-width: 0;
+    overflow-x: hidden;
 }
 
 .app-content-wrapper {
@@ -429,8 +432,10 @@ body.sidebar-collapse .app-sidebar {
 
 /* ---------- Responsif (mobile / tablet) ---------- */
 
+html,
 body {
     overflow-x: hidden;
+    max-width: 100%;
 }
 
 img,
