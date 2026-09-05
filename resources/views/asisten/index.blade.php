@@ -50,6 +50,15 @@
             var token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
             function esc(s) { var d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+            // Render Markdown sederhana dari AI ke HTML (escape dulu agar aman dari XSS).
+            function mdToHtml(s) {
+                var e = esc(s);
+                e = e.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>'); // **tebal**
+                e = e.replace(/__([^_]+)__/g, '<strong>$1</strong>');     // __tebal__
+                e = e.replace(/`([^`]+)`/g, '<code>$1</code>');           // `kode`
+                e = e.replace(/^\s*[-*]\s+/gm, '• ');                     // butir daftar
+                return e;
+            }
             function add(text, who, isHtml) {
                 var wrap = document.createElement('div');
                 wrap.className = 'chat-msg ' + who;
@@ -77,7 +86,7 @@
                 .then(function (r) { return r.json().then(function (d) { return { status: r.status, data: d }; }); })
                 .then(function (res) {
                     typing.parentNode.remove();
-                    if (res.status === 200 && res.data.ok) add(res.data.answer, 'bot');
+                    if (res.status === 200 && res.data.ok) add(mdToHtml(res.data.answer), 'bot', true);
                     else add(res.data.message || 'Maaf, terjadi kesalahan.', 'bot');
                     sendBtn.disabled = false;
                 })
