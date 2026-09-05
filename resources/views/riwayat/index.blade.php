@@ -16,7 +16,7 @@
                 <span class="icon"><i class="bi bi-check-circle"></i></span>
                 <div>
                     <div class="num">{{ number_format($totalDisetujui, 0, ',', '.') }}</div>
-                    <div class="label">Setoran Sah</div>
+                    <div class="label">Setoran Valid</div>
                 </div>
             </div>
         </div>
@@ -87,9 +87,9 @@
                                 @if ($s->status === 'pending')
                                     <span class="badge text-bg-warning"><i class="bi bi-hourglass-split me-1"></i>Menunggu</span>
                                 @elseif ($s->status === 'ditolak')
-                                    <span class="badge text-bg-danger"><i class="bi bi-x-lg me-1"></i>Ditolak</span>
+                                    <span class="badge text-bg-danger"><i class="bi bi-x-lg me-1"></i>Tidak Valid</span>
                                 @else
-                                    <span class="badge text-bg-success"><i class="bi bi-check-lg me-1"></i>Sah</span>
+                                    <span class="badge text-bg-success"><i class="bi bi-check-lg me-1"></i>Valid</span>
                                 @endif
                             </td>
                             <td class="small">{{ $s->created_at->format('d M Y, H:i') }}</td>
