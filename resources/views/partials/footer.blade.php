@@ -7,7 +7,7 @@
                     Smart Site
                 </a>
                 <p class="mb-0" style="color:rgba(255,255,255,.7)">
-                    Tong sampah pintar berbasis IoT &amp; AI untuk menciptakan sekolah yang lebih peduli lingkungan.
+             <strong>Smart Site</strong> adalah aplikasi web yang dikembangkan oleh siswa <strong>SMK Islam Malahayati</strong> sebagai penghubung antara tong sampah pintar <strong>SmartBin</strong> dengan pengguna.
                 </p>
                 <p class="mt-2 mb-0">
                     <a href="https://smk.malahayatiislamicschool.sch.id/" target="_blank" rel="noopener noreferrer" class="footer-link">
@@ -34,11 +34,9 @@
                 <h6 class="fw-bold text-white">Ikuti Kami</h6>
                 <div class="social mb-3">
                     <a href="https://www.instagram.com/itclubsmk?igsi=MWdueWpsYnduZHBsMQ==" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
-                    <a href="#" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
                     <a href="https://www.tiktok.com/@itclubsmk?_r=1&amp;_t=ZS-99ETsfIeCPA" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><i class="bi bi-tiktok"></i></a>
-                    <a href="#" aria-label="Email"><i class="bi bi-envelope-fill"></i></a>
                 </div>
-                <p class="mb-0" style="color:rgba(255,255,255,.7)">Tim Smart Site - SMK Islam Malahayati</p>
+                <p class="mb-0" style="color:rgba(255,255,255,.7)">Team IT Club - SMK Islam Malahayati</p>
             </div>
         </div>
 

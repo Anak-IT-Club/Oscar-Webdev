@@ -1,5 +1,4 @@
 @extends('layouts.landing')
-
 @section('content')
     @include('partials.navbar')
 
@@ -21,10 +20,13 @@
                     <div class="contact-card h-100">
                         <h5 class="fw-bold mb-3" style="color:var(--smart-green-dark)">Informasi Kontak</h5>
                         <p style="color:var(--smart-muted)">
-                            Smart Site adalah tong sampah pintar berbasis IoT &amp; AI yang dikembangkan oleh
-                            siswa <strong>SMK Islam Malahayati</strong>. Kalau kamu punya pertanyaan, ingin
-                            melihat demo, atau memasang Smart Site di sekolahmu, silakan hubungi kami lewat
-                            informasi di bawah atau kirim pesan langsung.
+                            <strong>Smart Site</strong> adalah aplikasi web yang dikembangkan oleh siswa <strong>SMK Islam Malahayati</strong>
+                            sebagai penghubung antara tong sampah pintar <strong>SmartBin</strong> dengan pengguna. <strong>SmartBin</strong>
+                            membaca kartu RFID dan memindai sampah via kamera berbasis AI untuk mengenali jenis
+                            sampahnya, lalu seluruh datanya dikirim ke <strong>Smart Site</strong> agar poin pengguna langsung
+                            tercatat dan dapat dipantau secara real-time di website ini. Kalau kamu punya
+                            pertanyaan, ingin melihat demo, atau memasang <strong>SmartBin</strong> di sekolahmu, silakan hubungi
+                            kami lewat informasi di bawah atau kirim pesan langsung.
                         </p>
                         <ul class="list-unstyled mb-0 contact-info mt-3" style="color:var(--smart-muted)">
                             <li>
@@ -52,7 +54,7 @@
                                 <span class="ci-icon"><i class="bi bi-telephone"></i></span>
                                 <div>
                                     <div class="fw-semibold" style="color:var(--smart-green-dark)">WhatsApp</div>
-                                    <div class="small">0812-3456-7890</div>
+                                    <div class="small">0823-1825-8585</div>
                                 </div>
                             </li>
                             <li>
