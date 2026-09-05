@@ -87,12 +87,12 @@
                         </div>
                     </form>
 
-                    <div id="storeDone" class="alert alert-success d-none mt-2 mb-0"></div>
-
                     <div id="noOpsi" class="alert alert-warning d-none mt-2 mb-0">
                         Belum ada master sampah untuk jenis ini. Hubungi admin untuk menambahkannya.
                     </div>
                 </div>
+
+                <div id="storeDone" class="alert alert-success d-none mt-3 mb-0"></div>
             </div>
         </div>
     </div>
@@ -144,6 +144,7 @@
                 var file = this.files[0];
                 if (!file) return;
                 if (!file.type.match(/^image\//)) { alert('Pilih file gambar (JPG/PNG).'); this.value = ''; return; }
+                hide(storeDone); hide(result); hide(errorBox); show(idle);
                 analyzeBtn.disabled = true;
                 resizeImage(file, 1280, 0.85).then(function (blob) {
                     currentBlob = blob;
@@ -160,7 +161,7 @@
 
             analyzeBtn.addEventListener('click', function () {
                 if (!currentBlob) return;
-                hide(idle); hide(result); hide(errorBox); show(loading);
+                hide(idle); hide(result); hide(errorBox); hide(storeDone); show(loading);
                 analyzeBtn.disabled = true;
 
                 var fd = new FormData();
@@ -247,9 +248,21 @@
                 .then(function (r) { return r.json().then(function (d) { return { status: r.status, data: d }; }); })
                 .then(function (res) {
                     if (res.status === 200 && res.data.ok) {
-                        hide(result);
+                        // Reset total: 1 foto = 1 setoran. Harus foto/scan ulang untuk setor lagi.
+                        hide(result); hide(idle); hide(errorBox);
                         storeDone.textContent = res.data.message;
                         show(storeDone);
+
+                        currentBlob = null;
+                        input.value = '';
+                        preview.src = '';
+                        preview.classList.add('d-none');
+                        show(placeholder);
+                        analyzeBtn.disabled = true;
+                        analyzeBtn.innerHTML = '<i class="bi bi-magic me-1"></i> Analisis dengan AI';
+                        opsiWrap.innerHTML = '';
+                        claimBtn.disabled = true;
+                        claimBtn.innerHTML = '<i class="bi bi-send-check me-1"></i> Setor untuk Divalidasi';
                     } else {
                         claimBtn.disabled = false;
                         claimBtn.innerHTML = '<i class="bi bi-send-check me-1"></i> Setor untuk Divalidasi';
