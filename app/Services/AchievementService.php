@@ -15,16 +15,16 @@ class AchievementService
      */
     public function for(User $user): array
     {
-        $setoran = $user->setoran()->get();
+        $setoran = $user->setoran()->where('status', 'disetujui')->get();
         $totalSetoran = $setoran->count();
         $totalPoin = (int) $setoran->sum('poin');
         $jenisUnik = $setoran->pluck('jenis_sampah')->unique();
         $b3 = $setoran->where('jenis_sampah', 'B3')->count();
         $hariUnik = $setoran->map(fn ($s) => $s->created_at->toDateString())->unique()->count();
 
-        // peringkat siswa (berdasarkan poin terkumpul)
         $rank = User::where('role', 'siswa')
-            ->withSum('setoran as p', 'poin')->orderByDesc('p')->pluck('id')
+            ->withSum(['setoran as p' => fn ($q) => $q->where('status', 'disetujui')], 'poin')
+            ->orderByDesc('p')->pluck('id')
             ->search($user->id);
         $rank = $rank === false ? null : $rank + 1;
 
@@ -42,9 +42,8 @@ class AchievementService
             $badge('juara', 'Sang Juara', 'bi-trophy-fill', 'Menjadi peringkat #1 leaderboard', $rank === 1, null, null),
         ];
 
-        // ---- Misi mingguan (Senin s.d. sekarang) ----
         $awalMinggu = Carbon::now()->startOfWeek();
-        $mingguIni = $user->setoran()->where('created_at', '>=', $awalMinggu)->get();
+        $mingguIni = $user->setoran()->where('status', 'disetujui')->where('created_at', '>=', $awalMinggu)->get();
         $setoranMinggu = $mingguIni->count();
         $poinMinggu = (int) $mingguIni->sum('poin');
         $b3Minggu = $mingguIni->where('jenis_sampah', 'B3')->count();

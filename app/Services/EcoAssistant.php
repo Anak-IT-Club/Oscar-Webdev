@@ -70,22 +70,24 @@ class EcoAssistant
     {
         $kurs = (int) config('smartsite.poin_to_rupiah', 100);
         $totalSiswa = User::where('role', 'siswa')->count();
-        $totalSetoran = Setoran::count();
-        $totalPoin = (int) Setoran::sum('poin');
+        $totalSetoran = Setoran::where('status', 'disetujui')->count();
+        $totalPoin = (int) Setoran::where('status', 'disetujui')->sum('poin');
 
-        $perJenis = Setoran::selectRaw('jenis_sampah, SUM(poin) as total, COUNT(*) as jml')
+        $perJenis = Setoran::where('status', 'disetujui')
+            ->selectRaw('jenis_sampah, SUM(poin) as total, COUNT(*) as jml')
             ->groupBy('jenis_sampah')->get()
             ->map(fn ($r) => "- {$r->jenis_sampah}: {$r->total} poin ({$r->jml} setoran)")
             ->implode("\n");
 
         $topSiswa = User::where('role', 'siswa')
-            ->withSum('setoran as p', 'poin')->orderByDesc('p')->take(5)->get()
+            ->withSum(['setoran as p' => fn ($q) => $q->where('status', 'disetujui')], 'poin')
+            ->orderByDesc('p')->take(5)->get()
             ->values()
             ->map(fn ($u, $i) => ($i + 1).". {$u->nama} (".($u->kelas ?? '-').") — ".(int) $u->p.' poin')
             ->implode("\n");
 
         $kelas = User::where('role', 'siswa')
-            ->withSum('setoran as p', 'poin')->get()
+            ->withSum(['setoran as p' => fn ($q) => $q->where('status', 'disetujui')], 'poin')->get()
             ->filter(fn ($u) => filled($u->kelas) && $u->kelas !== '-')
             ->groupBy('kelas')
             ->map(fn ($g, $k) => [$k, (int) $g->sum('p')])

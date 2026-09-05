@@ -34,6 +34,9 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('users', UserController::class)->except(['show']);
     Route::resource('sampah', SampahController::class)->except(['show']);
+    Route::get('/setoran/validasi', [SetoranController::class, 'validasi'])->name('setoran.validasi');
+    Route::post('/setoran/{setoran}/approve', [SetoranController::class, 'approve'])->name('setoran.approve');
+    Route::post('/setoran/{setoran}/reject', [SetoranController::class, 'reject'])->name('setoran.reject');
     Route::resource('setoran', SetoranController::class)->only(['index', 'create', 'store', 'destroy']);
     Route::resource('hadiah', HadiahController::class)->except(['show']);
 

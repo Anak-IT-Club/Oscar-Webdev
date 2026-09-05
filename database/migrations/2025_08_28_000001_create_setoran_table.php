@@ -18,7 +18,6 @@ return new class extends Migration
             $table->foreignId('sampah_id')->nullable()->constrained('sampah')->nullOnDelete();
             $table->string('jenis_sampah');
             $table->integer('poin');
-            // sumber: manual (dicatat admin), ai (hasil scan), smartbin (nanti dari alat)
             $table->string('sumber')->default('manual');
             $table->string('catatan')->nullable();
             $table->timestamps();
