@@ -175,7 +175,7 @@
                 <div class="dash-card green p-4 d-flex flex-column justify-content-center">
                     <div class="dash-sub">Status</div>
                     <div class="num" style="font-size:2rem">Aktif</div>
-                    <div class="dash-sub">keep it up! 💚</div>
+                    {{-- <div class="dash-sub">keep it up! 💚</div> --}}
                 </div>
             </div>
         </div>
