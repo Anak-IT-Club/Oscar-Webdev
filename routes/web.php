@@ -11,6 +11,7 @@ use App\Http\Controllers\ScannerController;
 use App\Http\Controllers\LeaderboardController;
 use App\Http\Controllers\AsistenController;
 use App\Http\Controllers\PencapaianController;
+use App\Http\Controllers\RiwayatController;
 use App\Http\Controllers\PencairanController;
 use App\Http\Controllers\ProfileController;
 
@@ -53,6 +54,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/scan/store', [ScannerController::class, 'store'])->name('scanner.store');
 
     Route::get('/pencapaian', [PencapaianController::class, 'index'])->name('pencapaian.index');
+    Route::get('/riwayat-setoran', [RiwayatController::class, 'index'])->name('riwayat.index');
 
     // Bank Sampah Digital
     Route::get('/tabungan', [PencairanController::class, 'index'])->name('tabungan.index');
