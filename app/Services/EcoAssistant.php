@@ -83,7 +83,7 @@ class EcoAssistant
             ->withSum(['setoran as p' => fn ($q) => $q->where('status', 'disetujui')], 'poin')
             ->orderByDesc('p')->take(5)->get()
             ->values()
-            ->map(fn ($u, $i) => ($i + 1).". {$u->nama} (".($u->kelas ?? '-').") — ".(int) $u->p.' poin')
+            ->map(fn ($u, $i) => ($i + 1).". {$u->nama} (".($u->kelas ?? '-').") - ".(int) $u->p.' poin')
             ->implode("\n");
 
         $kelas = User::where('role', 'siswa')

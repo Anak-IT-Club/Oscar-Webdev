@@ -96,7 +96,7 @@
                                         <button type="submit" class="btn btn-sm btn-danger" title="Tolak"><i class="bi bi-x-lg"></i></button>
                                     </form>
                                 @else
-                                    <span class="text-muted small">—</span>
+                                    <span class="text-muted small">-</span>
                                 @endif
                             </td>
                         </tr>
