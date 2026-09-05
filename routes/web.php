@@ -9,6 +9,7 @@ use App\Http\Controllers\HadiahController;
 use App\Http\Controllers\RedeemController;
 use App\Http\Controllers\ScannerController;
 use App\Http\Controllers\LeaderboardController;
+use App\Http\Controllers\AsistenController;
 use App\Http\Controllers\PencairanController;
 use App\Http\Controllers\ProfileController;
 
@@ -39,6 +40,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/redeem', [RedeemController::class, 'store'])->name('redeem.store');
 
     Route::get('/leaderboard', [LeaderboardController::class, 'index'])->name('leaderboard.index');
+
+    Route::get('/asisten', [AsistenController::class, 'index'])->name('asisten.index');
+    Route::post('/asisten/ask', [AsistenController::class, 'ask'])->name('asisten.ask');
 
     Route::get('/scan', [ScannerController::class, 'index'])->name('scanner.index');
     Route::post('/scan/analyze', [ScannerController::class, 'analyze'])->name('scanner.analyze');

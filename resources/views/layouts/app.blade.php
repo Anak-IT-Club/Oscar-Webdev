@@ -125,6 +125,12 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a href="{{ route('asisten.index') }}" class="nav-link {{ request()->routeIs('asisten.*') ? 'active' : '' }}">
+                                <i class="nav-icon bi bi-robot"></i>
+                                <p>Eco-Assistant</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="{{ route('profile.index') }}" class="nav-link {{ request()->routeIs('profile.*') ? 'active' : '' }}">
                                 <i class="nav-icon bi bi-person-circle"></i>
                                 <p>Profil</p>
