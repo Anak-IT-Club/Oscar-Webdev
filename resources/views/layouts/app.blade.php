@@ -123,6 +123,12 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a href="{{ route('riwayat.index') }}" class="nav-link {{ request()->routeIs('riwayat.*') ? 'active' : '' }}">
+                                <i class="nav-icon bi bi-clock-history"></i>
+                                <p>Riwayat Setoran</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="{{ route('pencapaian.index') }}" class="nav-link {{ request()->routeIs('pencapaian.*') ? 'active' : '' }}">
                                 <i class="nav-icon bi bi-award-fill"></i>
                                 <p>Pencapaian</p>

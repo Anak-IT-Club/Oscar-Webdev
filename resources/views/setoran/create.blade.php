@@ -22,7 +22,7 @@
                     <option value="" disabled {{ old('user_id') ? '' : 'selected' }}>Pilih siswa</option>
                     @foreach ($siswaList as $siswa)
                         <option value="{{ $siswa->id }}" {{ old('user_id') == $siswa->id ? 'selected' : '' }}>
-                            {{ $siswa->nama }} @if($siswa->nisn) ({{ $siswa->nisn }}) @endif — {{ $siswa->kelas ?? '-' }}
+                            {{ $siswa->nama }} @if($siswa->nisn) ({{ $siswa->nisn }}) @endif - {{ $siswa->kelas ?? '-' }}
                         </option>
                     @endforeach
                 </select>
@@ -36,7 +36,7 @@
                     @foreach ($sampahList as $sampah)
                         <option value="{{ $sampah->id }}" data-poin="{{ $sampah->poin }}" data-jenis="{{ $sampah->jenis_sampah }}"
                                 {{ old('sampah_id') == $sampah->id ? 'selected' : '' }}>
-                            {{ $sampah->nama_sampah }} ({{ $sampah->jenis_sampah }}) — {{ $sampah->poin }} poin
+                            {{ $sampah->nama_sampah }} ({{ $sampah->jenis_sampah }}) - {{ $sampah->poin }} poin
                         </option>
                     @endforeach
                 </select>

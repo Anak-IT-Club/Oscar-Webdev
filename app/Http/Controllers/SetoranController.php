@@ -111,7 +111,7 @@ class SetoranController extends Controller
             });
         }
 
-        return back()->with('success', 'Setoran divalidasi — poin ditambahkan ke siswa.');
+        return back()->with('success', 'Setoran divalidasi poin ditambahkan ke siswa.');
     }
 
     public function reject(Setoran $setoran)
