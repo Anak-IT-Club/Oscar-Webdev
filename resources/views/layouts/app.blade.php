@@ -106,6 +106,12 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a href="{{ route('pencapaian.index') }}" class="nav-link {{ request()->routeIs('pencapaian.*') ? 'active' : '' }}">
+                                <i class="nav-icon bi bi-award-fill"></i>
+                                <p>Pencapaian</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="{{ route('tabungan.index') }}" class="nav-link {{ request()->routeIs('tabungan.*') ? 'active' : '' }}">
                                 <i class="nav-icon bi bi-piggy-bank"></i>
                                 <p>Tabungan</p>
