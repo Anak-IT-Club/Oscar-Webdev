@@ -17,6 +17,8 @@ class Setoran extends Model
         'jenis_sampah',
         'poin',
         'sumber',
+        'status',
+        'foto',
         'catatan',
     ];
 

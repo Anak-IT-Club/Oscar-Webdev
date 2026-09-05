@@ -42,8 +42,9 @@ class SetoranController extends Controller
         return view('setoran.index', [
             'setorans' => $setorans,
             'jenisList' => Sampah::JENIS_SAMPAH,
-            'totalPoinHariIni' => Setoran::whereDate('created_at', today())->sum('poin'),
-            'totalPoinSemua' => Setoran::sum('poin'),
+            'totalPoinHariIni' => Setoran::where('status', 'disetujui')->whereDate('created_at', today())->sum('poin'),
+            'totalPoinSemua' => Setoran::where('status', 'disetujui')->sum('poin'),
+            'pendingCount' => Setoran::where('status', 'pending')->count(),
         ]);
     }
 
@@ -74,6 +75,7 @@ class SetoranController extends Controller
                 'jenis_sampah' => $sampah->jenis_sampah,
                 'poin' => $sampah->poin,
                 'sumber' => 'manual',
+                'status' => 'disetujui',
                 'catatan' => $data['catatan'] ?? null,
             ]);
 
@@ -84,15 +86,55 @@ class SetoranController extends Controller
             ->with('success', 'Setoran sampah berhasil dicatat dan poin siswa ditambahkan.');
     }
 
+    public function validasi()
+    {
+        $pendings = Setoran::with(['user', 'sampah'])
+            ->where('status', 'pending')
+            ->latest()
+            ->paginate(12);
+
+        return view('setoran.validasi', [
+            'pendings' => $pendings,
+            'pendingCount' => Setoran::where('status', 'pending')->count(),
+        ]);
+    }
+
+    public function approve(Setoran $setoran)
+    {
+        if ($setoran->status === 'pending') {
+            DB::transaction(function () use ($setoran) {
+                $user = User::whereKey($setoran->user_id)->lockForUpdate()->first();
+                if ($user) {
+                    $user->increment('poin', $setoran->poin);
+                }
+                $setoran->update(['status' => 'disetujui']);
+            });
+        }
+
+        return back()->with('success', 'Setoran divalidasi — poin ditambahkan ke siswa.');
+    }
+
+    public function reject(Setoran $setoran)
+    {
+        if ($setoran->status === 'pending') {
+            $setoran->update(['status' => 'ditolak']);
+        }
+
+        return back()->with('success', 'Setoran ditolak. Poin tidak ditambahkan.');
+    }
+
     public function destroy(Setoran $setoran)
     {
         DB::transaction(function () use ($setoran) {
-            $user = User::whereKey($setoran->user_id)->lockForUpdate()->first();
+            if ($setoran->status === 'disetujui') {
+                $user = User::whereKey($setoran->user_id)->lockForUpdate()->first();
+                if ($user) {
+                    $user->update(['poin' => max(0, $user->poin - $setoran->poin)]);
+                }
+            }
 
-            if ($user) {
-                // Kembalikan poin, jangan sampai minus.
-                $baru = max(0, $user->poin - $setoran->poin);
-                $user->update(['poin' => $baru]);
+            if ($setoran->foto && file_exists(public_path('foto_setoran/'.$setoran->foto))) {
+                @unlink(public_path('foto_setoran/'.$setoran->foto));
             }
 
             $setoran->delete();

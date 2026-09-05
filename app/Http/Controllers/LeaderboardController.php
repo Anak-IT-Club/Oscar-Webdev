@@ -8,11 +8,9 @@ class LeaderboardController extends Controller
 {
     public function index()
     {
-        // Ranking berdasarkan total poin yang PERNAH dikumpulkan (jumlah setoran),
-        // bukan saldo poin, agar menukar hadiah tidak menurunkan peringkat.
         $siswa = User::where('role', 'siswa')
-            ->withSum('setoran as poin_terkumpul', 'poin')
-            ->withCount('setoran as jumlah_setoran')
+            ->withSum(['setoran as poin_terkumpul' => fn ($q) => $q->where('status', 'disetujui')], 'poin')
+            ->withCount(['setoran as jumlah_setoran' => fn ($q) => $q->where('status', 'disetujui')])
             ->orderByDesc('poin_terkumpul')
             ->orderBy('nama')
             ->get()
@@ -22,7 +20,6 @@ class LeaderboardController extends Controller
                 return $u;
             });
 
-        // Ranking kelas: agregasi dari siswa (abaikan kelas kosong / '-').
         $kelas = $siswa
             ->filter(fn ($u) => filled($u->kelas) && $u->kelas !== '-')
             ->groupBy('kelas')
@@ -36,7 +33,6 @@ class LeaderboardController extends Controller
             ->sortByDesc('poin_terkumpul')
             ->values();
 
-        // Peringkat siswa yang sedang login (jika siswa).
         $rankSaya = null;
         if (auth()->user()->role === 'siswa') {
             $rankSaya = $siswa->search(fn ($u) => $u->id === auth()->id());

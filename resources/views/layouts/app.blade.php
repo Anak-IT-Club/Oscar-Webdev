@@ -2,7 +2,12 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" data-bs-theme="light">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="IT-Club, Smart Site, Sampah, Poin, Hadiah, Eco-Assistant, Smart Bin, SmartBin">
+    <meta name="description" content="Smart Site">
+    <meta name="author" content="IT-Club">
+    <meta name="robots" content="noindex, nofollow">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', 'Smart Site')</title>
     @vite(['resources/js/adminlte.js', 'resources/js/dashboard.js'])
@@ -81,9 +86,21 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('setoran.index') }}" class="nav-link {{ request()->routeIs('setoran.*') ? 'active' : '' }}">
+                            <a href="{{ route('setoran.index') }}" class="nav-link {{ request()->routeIs('setoran.index') || request()->routeIs('setoran.create') ? 'active' : '' }}">
                                 <i class="nav-icon bi bi-arrow-down-circle"></i>
                                 <p>Setoran</p>
+                            </a>
+                        </li>
+                        @php($setoranPending = \App\Models\Setoran::where('status', 'pending')->count())
+                        <li class="nav-item">
+                            <a href="{{ route('setoran.validasi') }}" class="nav-link {{ request()->routeIs('setoran.validasi') ? 'active' : '' }}">
+                                <i class="nav-icon bi bi-patch-check"></i>
+                                <p>
+                                    Validasi
+                                    @if ($setoranPending > 0)
+                                        <span class="badge text-bg-warning ms-1">{{ $setoranPending }}</span>
+                                    @endif
+                                </p>
                             </a>
                         </li>
                         <li class="nav-item">

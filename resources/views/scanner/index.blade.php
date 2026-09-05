@@ -77,12 +77,17 @@
 
                     <form action="{{ route('scanner.store') }}" method="POST" id="storeForm">
                         @csrf
-                        <label class="form-label fw-semibold">Pilih item sampah untuk poin:</label>
+                        <label class="form-label fw-semibold">Pilih item sampah:</label>
                         <div id="opsiWrap" class="d-grid gap-2 mb-3"></div>
                         <button type="submit" class="btn btn-cta-primary w-100" id="claimBtn" disabled>
-                            <i class="bi bi-coin me-1"></i> Setor &amp; Klaim Poin
+                            <i class="bi bi-send-check me-1"></i> Setor untuk Divalidasi
                         </button>
+                        <div class="form-text text-center">
+                            <i class="bi bi-shield-check me-1"></i>Poin masuk setelah petugas memvalidasi setoranmu.
+                        </div>
                     </form>
+
+                    <div id="storeDone" class="alert alert-success d-none mt-2 mb-0"></div>
 
                     <div id="noOpsi" class="alert alert-warning d-none mt-2 mb-0">
                         Belum ada master sampah untuk jenis ini. Hubungi admin untuk menambahkannya.
@@ -218,6 +223,47 @@
                 }
                 show(result);
             }
+
+            var storeForm = document.getElementById('storeForm');
+            var storeDone = document.getElementById('storeDone');
+            storeForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+                var sel = storeForm.querySelector('input[name="sampah_id"]:checked');
+                if (!sel || !currentBlob) return;
+                claimBtn.disabled = true;
+                claimBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-1"></span> Mengirim...';
+                hide(errorBox);
+
+                var fd = new FormData();
+                fd.append('sampah_id', sel.value);
+                fd.append('foto', currentBlob, 'scan.jpg');
+                fd.append('_token', token);
+
+                fetch('{{ route('scanner.store') }}', {
+                    method: 'POST',
+                    headers: { 'Accept': 'application/json', 'X-Requested-With': 'XMLHttpRequest' },
+                    body: fd
+                })
+                .then(function (r) { return r.json().then(function (d) { return { status: r.status, data: d }; }); })
+                .then(function (res) {
+                    if (res.status === 200 && res.data.ok) {
+                        hide(result);
+                        storeDone.textContent = res.data.message;
+                        show(storeDone);
+                    } else {
+                        claimBtn.disabled = false;
+                        claimBtn.innerHTML = '<i class="bi bi-send-check me-1"></i> Setor untuk Divalidasi';
+                        errorBox.textContent = (res.data && res.data.message) || 'Gagal mengirim setoran.';
+                        show(errorBox);
+                    }
+                })
+                .catch(function () {
+                    claimBtn.disabled = false;
+                    claimBtn.innerHTML = '<i class="bi bi-send-check me-1"></i> Setor untuk Divalidasi';
+                    errorBox.textContent = 'Terjadi kesalahan jaringan saat mengirim setoran.';
+                    show(errorBox);
+                });
+            });
         });
     </script>
 

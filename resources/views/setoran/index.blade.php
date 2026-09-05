@@ -83,6 +83,7 @@
                         <th>Jenis Sampah</th>
                         <th>Poin</th>
                         <th>Sumber</th>
+                        <th>Status</th>
                         <th>Waktu</th>
                         <th class="text-end" style="width:80px;">Aksi</th>
                     </tr>
@@ -106,6 +107,15 @@
                                     <span class="badge text-bg-secondary">Manual</span>
                                 @endif
                             </td>
+                            <td>
+                                @if ($setoran->status === 'pending')
+                                    <span class="badge text-bg-warning">Menunggu</span>
+                                @elseif ($setoran->status === 'ditolak')
+                                    <span class="badge text-bg-danger">Ditolak</span>
+                                @else
+                                    <span class="badge text-bg-success">Sah</span>
+                                @endif
+                            </td>
                             <td class="small">{{ $setoran->created_at->format('d M Y, H:i') }}</td>
                             <td class="text-end">
                                 <form action="{{ route('setoran.destroy', $setoran) }}" method="POST" class="d-inline"
@@ -120,7 +130,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="7" class="text-center text-muted py-3">Belum ada setoran.</td>
+                            <td colspan="8" class="text-center text-muted py-3">Belum ada setoran.</td>
                         </tr>
                     @endforelse
                 </tbody>

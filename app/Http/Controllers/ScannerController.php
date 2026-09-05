@@ -18,9 +18,6 @@ class ScannerController extends Controller
         ]);
     }
 
-    /**
-     * Terima gambar, klasifikasikan dengan AI, dan kembalikan saran jenis + opsi poin.
-     */
     public function analyze(Request $request, WasteClassifier $classifier)
     {
         $request->validate([
@@ -50,34 +47,38 @@ class ScannerController extends Controller
         ]);
     }
 
-    /**
-     * Konfirmasi hasil scan menjadi setoran (poin masuk) untuk user yang login.
-     */
     public function store(Request $request)
     {
         $data = $request->validate([
             'sampah_id' => ['required', 'exists:sampah,id'],
+            'foto' => ['required', 'image', 'mimes:jpeg,jpg,png,webp', 'max:5120'],
         ]);
 
         $sampah = Sampah::findOrFail($data['sampah_id']);
-        $userId = auth()->id();
 
-        DB::transaction(function () use ($userId, $sampah) {
-            $user = User::whereKey($userId)->lockForUpdate()->firstOrFail();
+        $dir = public_path('foto_setoran');
+        if (! file_exists($dir)) {
+            mkdir($dir, 0755, true);
+        }
+        $file = $request->file('foto');
+        $ext = $file->getClientOriginalExtension() ?: 'jpg';
+        $filename = 'setoran-'.auth()->id().'-'.time().'.'.$ext;
+        $file->move($dir, $filename);
 
-            Setoran::create([
-                'user_id' => $user->id,
-                'sampah_id' => $sampah->id,
-                'jenis_sampah' => $sampah->jenis_sampah,
-                'poin' => $sampah->poin,
-                'sumber' => 'ai',
-                'catatan' => 'Hasil AI Waste Scanner',
-            ]);
+        Setoran::create([
+            'user_id' => auth()->id(),
+            'sampah_id' => $sampah->id,
+            'jenis_sampah' => $sampah->jenis_sampah,
+            'poin' => $sampah->poin,
+            'sumber' => 'ai',
+            'status' => 'pending',
+            'foto' => $filename,
+            'catatan' => 'Hasil AI Waste Scanner',
+        ]);
 
-            $user->increment('poin', $sampah->poin);
-        });
-
-        return redirect()->route('scanner.index')
-            ->with('success', 'Mantap! Sampah "'.$sampah->nama_sampah.'" berhasil disetor, +'.$sampah->poin.' poin.');
+        return response()->json([
+            'ok' => true,
+            'message' => 'Setoran terkirim! Menunggu validasi petugas sebelum poin masuk.',
+        ]);
     }
 }
