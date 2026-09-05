@@ -92,11 +92,29 @@
                                 <p>Hadiah</p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{ route('pencairan.index') }}" class="nav-link {{ request()->routeIs('pencairan.*') ? 'active' : '' }}">
+                                <i class="nav-icon bi bi-cash-coin"></i>
+                                <p>Pencairan</p>
+                            </a>
+                        </li>
                         @else
                         <li class="nav-item">
                             <a href="{{ route('scanner.index') }}" class="nav-link {{ request()->routeIs('scanner.*') ? 'active' : '' }}">
                                 <i class="nav-icon bi bi-camera-fill"></i>
                                 <p>Scan Sampah (AI)</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('pencapaian.index') }}" class="nav-link {{ request()->routeIs('pencapaian.*') ? 'active' : '' }}">
+                                <i class="nav-icon bi bi-award-fill"></i>
+                                <p>Pencapaian</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('tabungan.index') }}" class="nav-link {{ request()->routeIs('tabungan.*') ? 'active' : '' }}">
+                                <i class="nav-icon bi bi-piggy-bank"></i>
+                                <p>Tabungan</p>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -110,6 +128,12 @@
                             <a href="{{ route('leaderboard.index') }}" class="nav-link {{ request()->routeIs('leaderboard.*') ? 'active' : '' }}">
                                 <i class="nav-icon bi bi-trophy-fill"></i>
                                 <p>Leaderboard</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('asisten.index') }}" class="nav-link {{ request()->routeIs('asisten.*') ? 'active' : '' }}">
+                                <i class="nav-icon bi bi-robot"></i>
+                                <p>Eco-Assistant</p>
                             </a>
                         </li>
                         <li class="nav-item">

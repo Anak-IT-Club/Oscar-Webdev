@@ -9,6 +9,9 @@ use App\Http\Controllers\HadiahController;
 use App\Http\Controllers\RedeemController;
 use App\Http\Controllers\ScannerController;
 use App\Http\Controllers\LeaderboardController;
+use App\Http\Controllers\AsistenController;
+use App\Http\Controllers\PencapaianController;
+use App\Http\Controllers\PencairanController;
 use App\Http\Controllers\ProfileController;
 
 Route::get('/', function () {
@@ -39,7 +42,19 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/leaderboard', [LeaderboardController::class, 'index'])->name('leaderboard.index');
 
+    Route::get('/asisten', [AsistenController::class, 'index'])->name('asisten.index');
+    Route::post('/asisten/ask', [AsistenController::class, 'ask'])->name('asisten.ask');
+
     Route::get('/scan', [ScannerController::class, 'index'])->name('scanner.index');
     Route::post('/scan/analyze', [ScannerController::class, 'analyze'])->name('scanner.analyze');
     Route::post('/scan/store', [ScannerController::class, 'store'])->name('scanner.store');
+
+    Route::get('/pencapaian', [PencapaianController::class, 'index'])->name('pencapaian.index');
+
+    // Bank Sampah Digital
+    Route::get('/tabungan', [PencairanController::class, 'index'])->name('tabungan.index');
+    Route::post('/tabungan', [PencairanController::class, 'store'])->name('tabungan.store');
+    Route::get('/pencairan', [PencairanController::class, 'adminIndex'])->name('pencairan.index');
+    Route::post('/pencairan/{pencairan}/approve', [PencairanController::class, 'approve'])->name('pencairan.approve');
+    Route::post('/pencairan/{pencairan}/reject', [PencairanController::class, 'reject'])->name('pencairan.reject');
 });

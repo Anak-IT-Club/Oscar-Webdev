@@ -72,4 +72,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(Setoran::class);
     }
+
+    public function pencairan()
+    {
+        return $this->hasMany(Pencairan::class);
+    }
+
+    public function saldoRupiah(): int
+    {
+        return (int) $this->poin * (int) config('smartsite.poin_to_rupiah', 100);
+    }
 }

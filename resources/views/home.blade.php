@@ -64,15 +64,19 @@
             <div class="col-lg-5">
                 <div class="dash-card p-4 h-100">
                     <h2 class="dash-title h6 mb-3">Poin per Jenis Sampah</h2>
-                    <canvas id="chartJenis" height="220"
-                            data-labels='@json($jenisLabels)' data-values='@json($jenisData)'></canvas>
+                    <div style="position:relative; height:260px;">
+                        <canvas id="chartJenis"
+                                data-labels='@json($jenisLabels)' data-values='@json($jenisData)'></canvas>
+                    </div>
                 </div>
             </div>
             <div class="col-lg-7">
                 <div class="dash-card p-4 h-100">
                     <h2 class="dash-title h6 mb-3">Tren Setoran 7 Hari Terakhir</h2>
-                    <canvas id="chartTren" height="220"
-                            data-labels='@json($trenLabels)' data-values='@json($trenData)'></canvas>
+                    <div style="position:relative; height:260px;">
+                        <canvas id="chartTren"
+                                data-labels='@json($trenLabels)' data-values='@json($trenData)'></canvas>
+                    </div>
                 </div>
             </div>
         </div>
@@ -96,6 +100,7 @@
                             }]
                         },
                         options: {
+                            maintainAspectRatio: false,
                             plugins: { legend: { position: 'bottom' } },
                             cutout: '62%'
                         }
@@ -117,6 +122,7 @@
                             }]
                         },
                         options: {
+                            maintainAspectRatio: false,
                             plugins: { legend: { display: false } },
                             scales: { y: { beginAtZero: true, ticks: { precision: 0 } } }
                         }
