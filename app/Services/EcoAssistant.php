@@ -29,7 +29,9 @@ class EcoAssistant
             ."(2) memberi edukasi pemilahan sampah (Organik, Non-Organik, B3, Residu) dan tips daur ulang, "
             ."(3) memotivasi siswa memilah sampah. "
             ."Jawab singkat, jelas, dan ramah dalam Bahasa Indonesia. "
-            ."Jika pertanyaan tentang data yang tidak tersedia, katakan dengan jujur. Jangan mengarang angka.\n\n"
+            ."Nama siswa dan kelas pada DATA bersifat publik (ditampilkan di leaderboard aplikasi), jadi kamu BOLEH dan DIHARAPKAN menyebutkannya. "
+            ."Untuk pertanyaan tentang siswa/user teratas, paling rajin, atau paling banyak menyetor, jawab langsung memakai daftar 'Peringkat siswa' pada DATA (sebutkan namanya). "
+            ."Hanya katakan data tidak tersedia bila memang benar-benar tidak ada di DATA. Jangan mengarang angka.\n\n"
             ."=== DATA SMART SITE (terkini) ===\n".$this->context();
 
         try {
@@ -81,9 +83,10 @@ class EcoAssistant
 
         $topSiswa = User::where('role', 'siswa')
             ->withSum(['setoran as p' => fn ($q) => $q->where('status', 'disetujui')], 'poin')
+            ->withCount(['setoran as jml' => fn ($q) => $q->where('status', 'disetujui')])
             ->orderByDesc('p')->take(5)->get()
             ->values()
-            ->map(fn ($u, $i) => ($i + 1).". {$u->nama} (".($u->kelas ?? '-').") - ".(int) $u->p.' poin')
+            ->map(fn ($u, $i) => ($i + 1).". {$u->nama} (".($u->kelas ?? '-').") - ".(int) $u->p.' poin, '.(int) $u->jml.' setoran')
             ->implode("\n");
 
         $kelas = User::where('role', 'siswa')
@@ -106,7 +109,7 @@ class EcoAssistant
             ."Kurs: 1 poin = Rp {$kurs}.\n\n"
             ."Poin per jenis sampah:\n{$perJenis}\n\n"
             ."Peringkat kelas (top 5):\n{$kelas}\n\n"
-            ."Peringkat siswa (top 5):\n{$topSiswa}\n\n"
+            ."Peringkat siswa teratas (nama boleh disebutkan, urut poin, lengkap dengan jumlah setoran):\n{$topSiswa}\n\n"
             ."Master jenis sampah & poin:\n{$sampah}\n\n"
             ."Daftar hadiah & poin yang dibutuhkan:\n{$hadiah}";
     }
